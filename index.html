@@ -123,7 +123,8 @@
             padding-bottom: 80px;
         }
 
-        .tab-content.active {
+        /* 初始加载时只让有 active 的 block 显示 */
+        #tab-home.active {
             display: block;
         }
         
@@ -1435,13 +1436,33 @@
     <script>
         // Tab 切换逻辑
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // 阻止可能的默认跳转
                 
+                // 1. 移除所有导航的高亮状态
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                
+                // 2. 隐藏所有 Tab 内容
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.style.display = 'none';
+                    tab.classList.remove('active');
+                });
+                
+                // 3. 激活当前点击的导航
                 this.classList.add('active');
+                
+                // 4. 获取目标 ID 并显示对应的 Tab
                 const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
+                const targetTab = document.getElementById(targetId);
+                
+                if(targetTab) {
+                    targetTab.style.display = 'block';
+                    // 触发 reflow 确保动画重新执行
+                    void targetTab.offsetWidth;
+                    targetTab.classList.add('active');
+                }
+                
+                // 5. 滚动回顶部
                 document.querySelector('.main-content').scrollTop = 0;
             });
         });
