@@ -8,15 +8,15 @@ import {
 import { cn } from '../lib/cn'
 
 const nav = [
-  { to: '/', label: '总览', icon: LayoutGrid },
-  { to: '/interaction', label: '互动', icon: MessageCircle },
-  { to: '/profile', label: '画像', icon: ScanFace },
-  { to: '/tracking/weight', label: '体重管理', icon: Scale },
-  { to: '/tracking/agents', label: '智能体集群', icon: Sparkles },
-  { to: '/goods', label: '好物', icon: ShoppingBag },
-  { to: '/hospital', label: '医院', icon: Stethoscope },
-  { to: '/experts', label: '专家联盟', icon: Brain },
-  { to: '/dietitians', label: '营养师', icon: Apple },
+  { to: '/patient', label: '总览', icon: LayoutGrid },
+  { to: '/patient/interaction', label: '互动', icon: MessageCircle },
+  { to: '/patient/profile', label: '画像', icon: ScanFace },
+  { to: '/patient/weight', label: '体重管理', icon: Scale },
+  { to: '/patient/cluster', label: '智能体集群', icon: Sparkles },
+  { to: '/patient/goods', label: '好物', icon: ShoppingBag },
+  { to: '/patient/hospital', label: '医院', icon: Stethoscope },
+  { to: '/patient/experts', label: '专家联盟', icon: Brain },
+  { to: '/patient/dietitians', label: '营养师', icon: Apple },
 ]
 
 const SIDEBAR_COLLAPSED = 64  // w-16
@@ -46,9 +46,8 @@ export default function AppLayout() {
   const toggleMobile = useCallback(() => setMobileOpen(prev => !prev), [])
   const closeMobile = useCallback(() => setMobileOpen(false), [])
 
-  /* Check if a nav item is active */
   const isNavActive = (to) => {
-    if (to === '/') return location.pathname === '/'
+    if (to === '/patient') return location.pathname === '/patient' || location.pathname === '/patient/'
     return location.pathname.startsWith(to)
   }
 
@@ -91,7 +90,7 @@ export default function AppLayout() {
                 <IconTooltip key={item.to} label={item.label} show={!expanded}>
                   <NavLink
                     to={item.to}
-                    end={item.to === '/'}
+                    end={item.to === '/patient'}
                     className={() =>
                       cn(
                         'flex items-center gap-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 select-none whitespace-nowrap',
@@ -182,7 +181,7 @@ export default function AppLayout() {
                     <NavLink
                       key={item.to}
                       to={item.to}
-                      end={item.to === '/'}
+                      end={item.to === '/patient'}
                       onClick={closeMobile}
                       className={({ isActive }) =>
                         cn(
