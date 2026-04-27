@@ -6,24 +6,25 @@
     <title>木吾木同 Medtalent Agent - 医疗智能体演示平台</title>
     <style>
         :root {
-            --primary: #165DFF;
-            --primary-dark: #0E42D2;
-            --primary-light: #e8f3ff;
-            --bg-color: #f4f7fb;
-            --sidebar-bg: #0A1628;
-            --sidebar-hover: #1A2A42;
-            --text-main: #1D2129;
-            --text-secondary: #4E5969;
-            --text-light: #86909C;
+            --primary: #00C6FF;
+            --primary-dark: #0072FF;
+            --primary-light: #e6f7ff;
+            --bg-color: #ffffff;
+            --bg-secondary: #f7f9fc;
+            --sidebar-bg: rgba(255, 255, 255, 0.85);
+            --sidebar-hover: rgba(0, 114, 255, 0.05);
+            --text-main: #1A1D20;
+            --text-secondary: #5C6670;
+            --text-light: #8B95A1;
             --white: #ffffff;
-            --font-title: "STZhongsong", "华文中宋", serif;
-            --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 8px 24px rgba(22, 93, 255, 0.08);
-            --shadow-lg: 0 16px 48px rgba(22, 93, 255, 0.12);
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --font-title: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+            --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+            --shadow-sm: 0 4px 12px rgba(0, 114, 255, 0.04);
+            --shadow-md: 0 12px 32px rgba(0, 114, 255, 0.08);
+            --shadow-lg: 0 24px 64px rgba(0, 114, 255, 0.12);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,207 +34,228 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Sidebar */
+        /* Top Navigation (Replaced Sidebar) */
         .sidebar {
-            width: 280px;
+            width: 100%;
+            height: 72px;
             background-color: var(--sidebar-bg);
-            color: var(--white);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
-            flex-direction: column;
-            padding: 30px 20px;
-            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
-            z-index: 10;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
 
         .logo {
-            font-family: var(--font-title);
-            font-size: 22px;
-            margin-bottom: 40px;
-            text-align: center;
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
-
-        .logo-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #165DFF, #00D0FF);
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(22, 93, 255, 0.5);
+        
+        .logo img {
+            height: 36px;
+            /* 原图是白色字，我们在白背景上需要让它变黑 */
+            filter: brightness(0);
         }
 
         .nav-menu {
             list-style: none;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            flex-direction: row;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-item {
-            padding: 16px 20px;
-            border-radius: var(--radius-md);
+            padding: 8px 16px;
+            border-radius: 999px;
             cursor: pointer;
             transition: var(--transition);
             font-size: 15px;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: rgba(255,255,255,0.7);
+            color: var(--text-secondary);
         }
 
         .nav-item:hover {
             background-color: var(--sidebar-hover);
-            color: var(--white);
-            transform: translateX(5px);
+            color: var(--primary-dark);
+            transform: translateY(-1px);
         }
 
         .nav-item.active {
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            background: var(--text-main);
             color: var(--white);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
         }
 
         .sidebar-footer {
-            margin-top: auto;
-            text-align: center;
-            font-size: 12px;
-            color: rgba(255,255,255,0.4);
+            display: none;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
             overflow-y: auto;
-            padding: 40px;
+            padding: 72px 0 0 0; /* 为固定导航留出空间 */
             scroll-behavior: smooth;
         }
 
         .tab-content {
             display: none;
-            max-width: 1100px;
+            width: 100%;
             margin: 0 auto;
-            animation: fadeIn 0.4s ease-out forwards;
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding-bottom: 80px;
         }
 
+        /* 初始加载时只让有 active 的 block 显示 */
         .tab-content.active {
             display: block;
         }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* Hero Banner */
         .hero {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--white);
-            padding: 50px 40px;
-            border-radius: var(--radius-lg);
-            margin-bottom: 30px;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+            color: var(--text-main);
+            padding: 100px 40px 80px;
+            margin-bottom: 20px;
             text-align: center;
-            box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            transform: rotate(30deg);
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 400px;
+            background: radial-gradient(ellipse at center, rgba(0, 198, 255, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .hero h1 {
             font-family: var(--font-title);
-            font-size: 38px;
-            margin-bottom: 12px;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
             position: relative;
             z-index: 1;
+            background: linear-gradient(135deg, #1A1D20 0%, #4A5568 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1.hero-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 10px;
         }
 
         .hero p {
-            font-size: 18px;
-            opacity: 0.9;
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
             position: relative;
             z-index: 1;
         }
 
         /* Sections */
         .section {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 35px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .section:hover {
-            box-shadow: var(--shadow-md);
+            background: transparent;
+            padding: 60px 0;
+            margin-bottom: 20px;
         }
 
         .section-title {
             font-family: var(--font-title);
-            font-size: 24px;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
             color: var(--text-main);
-            margin-bottom: 25px;
+            margin-bottom: 32px;
             display: flex;
             align-items: center;
             gap: 12px;
+            justify-content: center;
+            text-align: center;
         }
 
+        /* 移除 section title 前面的 logo icon，追求极简 */
         .section-title::before {
-            content: '';
-            display: block;
-            width: 5px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 4px;
+            display: none;
         }
 
         .text {
-            font-size: 16px;
+            font-size: 17px;
             line-height: 1.8;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         /* Grids */
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
 
         /* Cards */
         .card {
-            background: var(--primary-light);
-            padding: 25px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(22, 93, 255, 0.1);
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
+            border: 1px solid rgba(0, 114, 255, 0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
-            background: var(--white);
-            border-color: var(--primary);
         }
 
         .card h3 {
-            font-size: 18px;
-            color: var(--primary);
-            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
         }
 
         .card ul {
@@ -241,21 +263,21 @@
             color: var(--text-secondary);
         }
 
-        .card li { margin-bottom: 6px; line-height: 1.6; }
+        .card li { margin-bottom: 10px; line-height: 1.6; }
 
         /* Tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; justify-content: center; }
         .tag {
-            padding: 6px 14px;
-            background: var(--white);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-main);
+            border-radius: 999px;
+            font-size: 14px;
             font-weight: 500;
             transition: var(--transition);
         }
-        .tag:hover { background: var(--primary); color: var(--white); }
+        .tag:hover { background: var(--primary-light); color: var(--primary-dark); }
 
         /* Table */
         .table-wrap {
@@ -283,67 +305,75 @@
 
         /* Level Items */
         .level-item {
-            padding: 20px;
-            border: 1px solid #e8f3ff;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            background: #fafbfc;
+            padding: 32px;
+            border: 1px solid rgba(0, 114, 255, 0.05);
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
         }
-        .level-item h3 { color: var(--primary); margin-bottom: 8px; font-size: 18px; }
+        .level-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .level-item h3 { color: var(--text-main); margin-bottom: 12px; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
 
         /* Data Showcase */
-        .data-showcase { text-align: center; padding: 15px; background: #f9fbff; border-radius: 12px;}
-        .data-num { font-size: 32px; font-weight: bold; color: var(--primary); margin-bottom: 5px; font-family: var(--font-title); }
-        .data-label { color: var(--text-secondary); font-size: 14px; }
+        .data-showcase { text-align: center; padding: 32px 20px; background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.02); }
+        .data-num { font-size: 40px; font-weight: 700; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; font-family: var(--font-title); letter-spacing: -1px; }
+        .data-label { color: var(--text-secondary); font-size: 15px; font-weight: 500; }
 
         /* --- Interactive Demo UI Styles --- */
         .demo-section {
-            background: linear-gradient(to bottom right, #ffffff, #f9fbff);
-            border: 1px solid rgba(22, 93, 255, 0.15);
+            background: var(--bg-secondary);
             border-radius: var(--radius-lg);
-            padding: 40px;
-            margin-top: 40px;
+            padding: 60px 40px;
+            margin: 60px 0;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
         }
         .demo-badge {
             position: absolute;
-            top: 0; right: 0;
-            background: var(--primary);
-            color: white;
+            top: 24px; left: 24px;
+            background: rgba(0, 114, 255, 0.1);
+            color: var(--primary-dark);
             padding: 6px 16px;
-            font-size: 12px;
-            font-weight: bold;
-            border-bottom-left-radius: var(--radius-md);
-            letter-spacing: 1px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
             z-index: 2;
         }
         .demo-title {
-            font-size: 20px;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            margin-top: 40px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-family: var(--font-title);
         }
         .btn-demo {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
+            padding: 12px 28px;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 8px 16px rgba(0, 114, 255, 0.2);
         }
-        .btn-demo:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-        .btn-demo:disabled { background: #c9d6f0; cursor: not-allowed; transform: none; box-shadow: none;}
+        .btn-demo:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 12px 24px rgba(0, 114, 255, 0.3); }
+        .btn-demo:disabled { background: var(--text-light); cursor: not-allowed; transform: none; box-shadow: none;}
         
         /* Chat UI */
         .chat-ui {
@@ -651,92 +681,90 @@
 </head>
 <body>
 
-    <!-- 侧边栏导航 -->
+    <!-- Top Navigation -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon"></div>
-            木吾木同 Agent
+            <img src="./透明底公司logo.png" alt="Medtalent" style="height: 32px; filter: brightness(0); object-fit: contain;">
         </div>
         <ul class="nav-menu">
-            <li class="nav-item active" data-target="tab-home">🏠 首页</li>
-            <li class="nav-item" data-target="tab-overview">🌐 1+N 智能体矩阵</li>
-            <li class="nav-item" data-target="tab-os">⚙️ Agent OS 底座</li>
-            <li class="nav-item" data-target="tab-knowledge">📚 智能健康知识引擎</li>
-            <li class="nav-item" data-target="tab-c-end">👥 面向大众端场景 - 自有平台</li>
-            <li class="nav-item" data-target="tab-b-end">⚕️ 面向医生端场景 - 专项定制</li>
+            <li class="nav-item active" data-target="tab-home">首页</li>
+            <li class="nav-item" data-target="tab-overview">1+N 智能体矩阵</li>
+            <li class="nav-item" data-target="tab-os">Agent OS 底座</li>
+            <li class="nav-item" data-target="tab-knowledge">智能健康知识引擎</li>
+            <li class="nav-item" data-target="tab-c-end">大众端平台</li>
+            <li class="nav-item" data-target="tab-b-end">医生端定制</li>
         </ul>
-        <div class="sidebar-footer">
-            <p>© 2026 Medtalent Inc.</p>
-            <p>生活方式医学 AI 平台</p>
-        </div>
     </div>
 
-    <!-- 主内容区 -->
+    <!-- Main Content -->
     <div class="main-content">
 
         <!-- Tab 0: 首页 -->
         <div id="tab-home" class="tab-content active">
             <div class="hero">
-                <p style="font-size: 24px; margin-bottom: 10px; opacity: 0.9;">有了病，不担心；少生病，更健康</p>
-                <h1 style="font-size: 42px; margin-bottom: 20px;">Medtalent agent 智能体矩阵</h1>
-                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #ffffff, #36CFC9); margin: 0 auto; border-radius: 2px;"></div>
+                <img src="./无文字logo.png" alt="Medtalent Agent" style="max-height: 80px; margin-bottom: 24px; filter: drop-shadow(0 8px 16px rgba(0,198,255,0.3));">
+                <h1>智能体矩阵生态</h1>
+                <h1 class="hero-gradient">有了病，不担心；少生病，更健康</h1>
+                <p>全新一代生活方式医学 AI-AGENT 底座开发<br>助力医学科普产业化，重塑健康未来</p>
+                <div style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; position: relative; z-index: 1;">
+                    <a href="#tab-overview" class="btn-demo" onclick="document.querySelector('[data-target=\'tab-overview\']').click()" style="padding: 14px 32px; font-size: 16px; text-decoration: none;">探索 1+N 计划</a>
+                    <a href="#tab-c-end" class="btn-demo" onclick="document.querySelector('[data-target=\'tab-c-end\']').click()" style="padding: 14px 32px; font-size: 16px; text-decoration: none; background: #f0f4f8; color: var(--text-main); box-shadow: none; border: 1px solid #e2e8f0;">体验系统</a>
+                </div>
             </div>
 
-            <div class="section" style="text-align: center; padding: 60px 40px;">
-                <p class="text" style="font-size: 20px; color: #34495e; margin-bottom: 40px;">
-                    我们坚信，这是一个值得全力以赴的伟大创业项目，坚持以服务群众为初心，让优质健康服务触手可及！
-                </p>
+            <div class="container">
+                <div class="section" style="text-align: center; padding: 80px 40px; background: transparent; box-shadow: none;">
+                    <p class="text" style="font-size: 24px; color: var(--text-main); margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                        我们坚信，这是一个值得全力以赴的伟大创业项目，<br>坚持以服务群众为初心，让优质健康服务触手可及。
+                    </p>
 
-                <h2 class="section-title" style="justify-content: center; margin-bottom: 30px;">我们的使命与价值</h2>
-                <ul style="list-style: none; padding: 0; font-size: 18px; color: #2c3e50; display: inline-block; text-align: left;">
-                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
-                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
-                        在人工智能浪潮汹涌袭来的时刻，我们站在前沿科技的浪尖之上
-                    </li>
-                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
-                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
-                        通过技术创新助力医学科普产业化高质量推进
-                    </li>
-                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
-                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
-                        助力医生搭建智能体体系，高效链接广大群众
-                    </li>
-                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
-                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
-                        助力百姓轻松获得触手可及的全周期健康管理服务
-                    </li>
-                </ul>
+                    <div class="grid-2" style="text-align: left; gap: 32px;">
+                        <div class="card" style="padding: 40px;">
+                            <h3 style="font-size: 22px; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 28px;">🌊</span> 前沿科技浪尖
+                            </h3>
+                            <p class="text" style="margin-bottom: 0;">在人工智能浪潮汹涌袭来的时刻，我们通过技术创新助力医学科普产业化高质量推进。</p>
+                        </div>
+                        <div class="card" style="padding: 40px;">
+                            <h3 style="font-size: 22px; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+                                <span style="font-size: 28px;">🤝</span> 医患高效链接
+                            </h3>
+                            <p class="text" style="margin-bottom: 0;">助力医生搭建智能体体系，高效链接广大群众，让百姓轻松获得全周期健康管理服务。</p>
+                        </div>
+                    </div>
 
-                <p class="text" style="font-size: 19px; font-weight: 500; color: var(--primary); margin-top: 50px; line-height: 1.8;">
-                    推动全民健康理念升级：从被动治疗走向主动健康，从病后管理走向事先预防，全方位助力中国老百姓提升健康认知，守护全民健康！
-                </p>
+                    <p class="text" style="font-size: 20px; font-weight: 500; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 80px; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                        推动全民健康理念升级：从被动治疗走向主动健康，从病后管理走向事先预防，全方位助力中国老百姓提升健康认知，守护全民健康！
+                    </p>
+                </div>
             </div>
         </div>
 
         <!-- Tab 1: 1+N 智能体矩阵 -->
         <div id="tab-overview" class="tab-content">
             <div class="hero">
-                <h1>Medtalent Agent - 1+N-PLAN</h1>
-                <h2 style="font-size: 26px; font-weight: normal; opacity: 0.95; margin-bottom: 10px;">AI智能体矩阵</h2>
-                <p>聚焦“AI+生活医学”核心赛道 · 技术赋能 + 商业变现双闭环</p>
+                <h2 style="font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 16px;">AI 智能体矩阵</h2>
+                <h1>1+N 智能开发计划</h1>
+                <p>聚焦“AI+生活医学”核心赛道 · 技术赋能与商业变现双闭环</p>
             </div>
             
-            <!-- Interactive Demo 1 -->
-            <div class="demo-section" style="margin-top: 0; margin-bottom: 40px;">
-                <div class="demo-badge">互动演示</div>
-                <h3 class="demo-title">🎯 1+N 智能路由中枢演示</h3>
-                <p class="text" style="font-size: 14px;">模拟通用基座接收用户自然语言，精准路由至对应垂直智能体的过程。</p>
-                
-                <div class="chat-ui" style="height: auto;">
-                    <div class="chat-input-area">
-                        <input type="text" id="routing-input" value="我最近每天晚上翻来覆去睡不着，白天头特别晕，该怎么办？" readonly>
-                        <button class="btn-demo" id="routing-btn" onclick="runRoutingDemo()">发起咨询 🚀</button>
-                    </div>
-                    <div class="chat-body" id="routing-log" style="min-height: 150px; display: none;">
-                        <!-- 动态生成 -->
+            <div class="container">
+                <!-- Interactive Demo 1 -->
+                <div class="demo-section">
+                    <div class="demo-badge">Interactive Demo</div>
+                    <h3 class="demo-title">🎯 1+N 智能路由中枢</h3>
+                    <p class="text" style="font-size: 16px;">模拟通用基座接收用户自然语言，精准路由至对应垂直智能体的过程。</p>
+                    
+                    <div class="chat-ui" style="height: auto; border: none; box-shadow: var(--shadow-md); border-radius: var(--radius-lg); background: var(--white);">
+                        <div class="chat-input-area" style="border-top: none; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 20px;">
+                            <input type="text" id="routing-input" value="我最近每天晚上翻来覆去睡不着，白天头特别晕，该怎么办？" readonly style="background: var(--bg-secondary); border: none; font-size: 16px; padding: 14px 24px;">
+                            <button class="btn-demo" id="routing-btn" onclick="runRoutingDemo()">发起咨询 🚀</button>
+                        </div>
+                        <div class="chat-body" id="routing-log" style="min-height: 150px; display: none; padding: 24px;">
+                            <!-- 动态生成 -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <div class="section">
                 <h2 class="section-title">平台定位</h2>
@@ -862,45 +890,46 @@
         <!-- Tab 2: Agent OS 底座 -->
         <div id="tab-os" class="tab-content">
             <div class="hero">
-                <h1>木吾木同Medtalent agent 底座</h1>
-                <div style="font-size: 24px; margin-bottom: 8px;">基于 Multi-Agent 协作架构</div>
-                <div style="font-size: 20px; opacity: 0.9;">列阵· 专业医疗Agent · 协同工作的智能操作系统</div>
+                <h2 style="font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 16px;">Agent OS</h2>
+                <h1>智能操作系统底座</h1>
+                <p>基于 Multi-Agent 协作架构 · 列阵协同的医疗级处理中枢</p>
             </div>
-
-            <!-- Interactive Demo 2 -->
-            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px;">
-                <div class="demo-badge">互动演示</div>
-                <h3 class="demo-title">⚙️ L1-L5 全链路处理引擎演示</h3>
-                <p class="text" style="font-size: 14px;">模拟多 Agent 协作系统处理一份真实体检报告的全过程。</p>
-                <button class="btn-demo" id="os-demo-btn" onclick="runOsDemo()">▶️ 模拟处理体检报告</button>
-                
-                <div class="workflow-demo">
-                    <div class="wf-step-container">
-                        <div class="wf-step" id="wf-s1">L1</div>
-                        <div class="wf-label">基础感知层<br>(OCR提取)</div>
+            
+            <div class="container">
+                <!-- Interactive Demo 2 -->
+                <div class="demo-section">
+                    <div class="demo-badge">Workflow Demo</div>
+                    <h3 class="demo-title">⚙️ L1-L5 全链路处理引擎</h3>
+                    <p class="text" style="font-size: 16px;">模拟多 Agent 协作系统处理一份真实体检报告的全过程。</p>
+                    <button class="btn-demo" id="os-demo-btn" onclick="runOsDemo()" style="margin-top: 10px;">▶️ 模拟处理体检报告</button>
+                    
+                    <div class="workflow-demo" style="margin-top: 60px;">
+                        <div class="wf-step-container">
+                            <div class="wf-step" id="wf-s1">L1</div>
+                            <div class="wf-label">感知层</div>
+                        </div>
+                        <div class="wf-step-container">
+                            <div class="wf-step" id="wf-s2">L2</div>
+                            <div class="wf-label">检索层</div>
+                        </div>
+                        <div class="wf-step-container">
+                            <div class="wf-step" id="wf-s3">L3</div>
+                            <div class="wf-label">推理层</div>
+                        </div>
+                        <div class="wf-step-container">
+                            <div class="wf-step" id="wf-s4">L4</div>
+                            <div class="wf-label">决策层</div>
+                        </div>
+                        <div class="wf-step-container">
+                            <div class="wf-step" id="wf-s5">L5</div>
+                            <div class="wf-label">监控层</div>
+                        </div>
                     </div>
-                    <div class="wf-step-container">
-                        <div class="wf-step" id="wf-s2">L2</div>
-                        <div class="wf-label">知识检索层<br>(RAG检索)</div>
-                    </div>
-                    <div class="wf-step-container">
-                        <div class="wf-step" id="wf-s3">L3</div>
-                        <div class="wf-label">逻辑推理层<br>(辅助诊断)</div>
-                    </div>
-                    <div class="wf-step-container">
-                        <div class="wf-step" id="wf-s4">L4</div>
-                        <div class="wf-label">决策执行层<br>(方案生成)</div>
-                    </div>
-                    <div class="wf-step-container">
-                        <div class="wf-step" id="wf-s5">L5</div>
-                        <div class="wf-label">元认知监控层<br>(合规审查)</div>
+                    
+                    <div class="wf-log" id="wf-log" style="background: #1A1D20; border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-lg);">
+                        [System] 等待指令...
                     </div>
                 </div>
-                
-                <div class="wf-log" id="wf-log">
-                    [System] 等待指令...
-                </div>
-            </div>
 
             <div class="section">
                 <p class="text">
@@ -1029,25 +1058,27 @@
         <!-- Tab 3: 智能健康知识引擎 -->
         <div id="tab-knowledge" class="tab-content">
             <div class="hero">
-                <h1>木吾木同Medtalent agent os</h1>
-                <p>基于 Multi-Agent 协作架构</p>
+                <h2 style="font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 16px;">Knowledge Engine</h2>
+                <h1>智能健康知识引擎</h1>
+                <p>收录超 5000 万条权威医学数据 · RAG 检索增强</p>
             </div>
-
-            <!-- Interactive Demo 3 -->
-            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px;">
-                <div class="demo-badge">互动演示</div>
-                <h3 class="demo-title">📚 RAG 循证医学知识检索</h3>
-                <p class="text" style="font-size: 14px;">模拟在海量知识库中进行大模型语义检索，提供可溯源的权威医学结论。</p>
-                
-                <div class="search-demo-bar">
-                    <input type="text" value="二甲双胍的主要禁忌症有哪些？" readonly>
-                    <button class="btn-demo" id="search-btn" onclick="runSearchDemo()">🔍 智能检索</button>
+            
+            <div class="container">
+                <!-- Interactive Demo 3 -->
+                <div class="demo-section" style="padding: 80px 60px; text-align: center;">
+                    <div class="demo-badge">Knowledge Search</div>
+                    <h3 class="demo-title" style="justify-content: center;">📚 RAG 循证医学知识检索</h3>
+                    <p class="text" style="font-size: 16px; margin-bottom: 40px;">模拟在海量知识库中进行大模型语义检索，提供可溯源的权威医学结论。</p>
+                    
+                    <div class="search-demo-bar" style="max-width: 800px; margin: 0 auto; box-shadow: var(--shadow-lg); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); background: var(--white);">
+                        <input type="text" value="二甲双胍的主要禁忌症有哪些？" readonly style="border: none; background: transparent; padding: 24px; font-size: 18px; border-radius: 0;">
+                        <button class="btn-demo" id="search-btn" onclick="runSearchDemo()" style="border-radius: 0; margin: 0; padding: 0 40px; font-size: 16px; box-shadow: none;">智能检索</button>
+                    </div>
+                    
+                    <div class="knowledge-result" id="knowledge-result" style="text-align: left; max-width: 800px; margin: 40px auto 0;">
+                        <div id="knowledge-content"></div>
+                    </div>
                 </div>
-                
-                <div class="knowledge-result" id="knowledge-result">
-                    <div id="knowledge-content"></div>
-                </div>
-            </div>
 
             <div class="section">
                 <h2 class="section-title">智能健康知识引擎</h2>
@@ -1135,42 +1166,30 @@
             </div>
         </div>
 
-        <!-- Tab 4: 大众端平台 -->
+        <!-- Tab 4: 大众端场景 -->
         <div id="tab-c-end" class="tab-content">
             <div class="hero">
-                <h1>智能体1+N开发计划 · 自有平台开发</h1>
-                <div style="font-size: 24px; margin-bottom: 8px;">面向大众百姓｜MedlifeClaw——生活方式医学AI智能体平台</div>
-                <div style="font-size: 18px; opacity: 0.9;">生活方式跟随式AI · 主动健康管理 · 全民健康责任第一步<br>全场景覆盖个性化健康需求，深耕循证生活方式干预，做全民专属全周期健康伙伴</div>
+                <h2 style="font-size: 24px; font-weight: 600; color: var(--primary); margin-bottom: 16px;">Consumer Platform</h2>
+                <h1>浙里健康 - 大众端平台</h1>
+                <p>主动预防 · 智能陪伴 · 触手可及的全周期健康管理服务</p>
             </div>
-
-            <!-- Interactive Demo 4 -->
-            <div class="demo-section" style="background: transparent; border: none; box-shadow: none; margin-top: 0; margin-bottom: 30px; padding: 0;">
-                <div class="mobile-mockup">
-                    <div class="mobile-header">MedlifeClaw 智能管家</div>
-                    <div class="chat-body" id="c-chat-body">
-                        <div class="msg ai">
-                            <div class="msg-content">您好！我是您的专属健康管理伙伴。基于您的健康画像，我能为您提供以下服务，请问今天需要什么帮助？</div>
-                            <div class="ai-footer">
-                                <span>内容由AI生成，仅供参考</span>
-                                <div class="ai-actions">
-                                    <span>🔊</span>
-                                    <span>📋</span>
-                                    <span>👍</span>
-                                    <span>👎</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chat-options" id="c-chat-options">
-                        <button class="chat-option-btn" onclick="runCEndDemo('体检指标异常，尿酸偏高怎么办？', 'uric_acid')">咨询指标异常</button>
-                        <button class="chat-option-btn" onclick="runCEndDemo('最近总觉得很累，睡眠也不好', 'sleep')">咨询睡眠与疲劳</button>
-                    </div>
-                    <div style="padding: 10px 15px; background: white; display: flex; align-items: center; gap: 10px; border-top: 1px solid #eee;">
-                        <div style="flex: 1; background: #f4f7fb; border-radius: 20px; padding: 10px 15px; color: #999; font-size: 14px;">有什么健康问题需要问...</div>
-                        <div style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; font-weight: bold;">+</div>
-                    </div>
+            
+            <div class="container">
+                <div class="section" style="margin-bottom: 0; padding-bottom: 0;">
+                    <p class="text" style="font-size: 18px; text-align: center; max-width: 800px; margin: 0 auto 60px;">
+                        为普通群众提供7x24小时的在线健康管家，涵盖体检报告解读、慢病日常管理、营养运动处方定制等核心场景。
+                    </p>
                 </div>
-            </div>
+
+                <!-- Interactive Demo 4 -->
+                <div class="demo-section" style="margin-top: 0; margin-bottom: 60px; text-align: center; padding: 100px 40px; background: linear-gradient(135deg, var(--bg-secondary) 0%, #e6f7ff 100%);">
+                    <div class="demo-badge" style="background: var(--white); color: var(--primary-dark);">System Entry</div>
+                    <h3 class="demo-title" style="justify-content: center; font-size: 40px; margin-bottom: 16px;">🎯 大众端健康平台</h3>
+                    <p class="text" style="font-size: 18px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">进入真实的浙里健康前端应用，体验基于多模态大模型的生活方式医学智能体平台。</p>
+                    <a href="/wutong/" class="btn-demo" style="text-decoration: none; padding: 16px 40px; font-size: 18px; border-radius: 999px; box-shadow: var(--shadow-md);">
+                        🚀 进入大众端平台系统
+                    </a>
+                </div>
 
             <div class="section">
                 <h2 class="section-title">核心信任数据</h2>
@@ -1359,48 +1378,27 @@
         <!-- Tab 5: 医生端定制 -->
         <div id="tab-b-end" class="tab-content">
             <div class="hero">
-                <h1>Doctor Voice Agent</h1>
-                <p>医声智能体 · 释放医生潜能，专注核心医疗</p>
+                <h2 style="font-size: 24px; font-weight: 600; color: #00C853; margin-bottom: 16px;">Doctor Workflow</h2>
+                <h1 style="background: linear-gradient(135deg, #00C853 0%, #009624 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">医生端定制开发</h1>
+                <p>门诊效率提升 · 智能病历生成 · 专科模型训练微调</p>
             </div>
-
-            <!-- Interactive Demo 5 -->
-            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px;">
-                <div class="demo-badge">互动演示</div>
-                <h3 class="demo-title">⚕️ AI 自动生成结构化病历</h3>
-                <p class="text" style="font-size: 14px;">模拟医生语音口述病情，AI 自动进行信息结构化提取及鉴别诊断辅助。</p>
-                
-                <div class="emr-demo">
-                    <!-- 左侧输入 -->
-                    <div class="emr-box">
-                        <h4>🎙️ 医生口述输入</h4>
-                        <textarea class="voice-input" id="b-voice-input" readonly>“患者男，45岁。主诉反复胸闷有一周了，同时伴有心悸不适。没有明显的放射痛。患者既往有高血压病史3年。”</textarea>
-                        <button class="btn-demo" id="b-demo-btn" onclick="runBEndDemo()" style="width: 100%; justify-content: center;">✨ AI 提取结构化病历</button>
-                    </div>
-                    
-                    <!-- 右侧结构化输出 -->
-                    <div class="emr-box">
-                        <h4>📝 结构化电子病历</h4>
-                        <div class="emr-field">
-                            <div class="emr-field-label">【主诉】</div>
-                            <div class="emr-field-value" id="emr-zhusu">等待提取...</div>
-                        </div>
-                        <div class="emr-field">
-                            <div class="emr-field-label">【现病史】</div>
-                            <div class="emr-field-value" id="emr-xianbingshi">等待提取...</div>
-                        </div>
-                        <div class="emr-field">
-                            <div class="emr-field-label">【既往史】</div>
-                            <div class="emr-field-value" id="emr-jiwangshi">等待提取...</div>
-                        </div>
-                        <div class="emr-field" style="margin-top: 20px; border-top: 1px dashed #eee; padding-top: 15px;">
-                            <div class="emr-field-label" style="color: #00C853;">💡 AI 辅助诊断建议</div>
-                            <div class="emr-field-value" id="emr-suggest" style="background: #e8f5e9; border-color: #c8e6c9;">等待生成...</div>
-                            <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">匹配置信度：<span id="emr-conf-text">0%</span></div>
-                            <div class="confidence-bar"><div class="confidence-fill" id="emr-conf"></div></div>
-                        </div>
-                    </div>
+            
+            <div class="container">
+                <div class="section" style="margin-bottom: 0; padding-bottom: 0;">
+                    <p class="text" style="font-size: 18px; text-align: center; max-width: 800px; margin: 0 auto 60px;">
+                        为医生群体提供强大的效率工具，支持专病数据集本地化部署，通过定制专属工作流极大地减少案头工作时间。
+                    </p>
                 </div>
-            </div>
+
+                <!-- Interactive Demo 5 -->
+                <div class="demo-section" style="margin-top: 0; margin-bottom: 60px; text-align: center; padding: 100px 40px; background: linear-gradient(135deg, var(--bg-secondary) 0%, #e8f5e9 100%);">
+                    <div class="demo-badge" style="background: var(--white); color: #009624;">System Entry</div>
+                    <h3 class="demo-title" style="justify-content: center; font-size: 40px; margin-bottom: 16px;">👨‍⚕️ 医生端定制服务</h3>
+                    <p class="text" style="font-size: 18px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">进入真实的医生端应用，体验语音口述生成病历、智能预问诊与自动辅助诊断。</p>
+                    <a href="/demo/" class="btn-demo" style="text-decoration: none; padding: 16px 40px; font-size: 18px; border-radius: 999px; box-shadow: 0 8px 16px rgba(0, 200, 83, 0.2); background: linear-gradient(135deg, #00C853 0%, #009624 100%);">
+                        ⚕️ 进入医生端系统
+                    </a>
+                </div>
 
             <div class="section">
                 <h2 class="section-title">核心能力体系</h2>
@@ -1438,13 +1436,31 @@
     <script>
         // Tab 切换逻辑
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // 阻止可能的默认跳转
                 
+                // 1. 移除所有导航的高亮状态
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                
+                // 2. 隐藏所有 Tab 内容
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                // 3. 激活当前点击的导航
                 this.classList.add('active');
+                
+                // 4. 获取目标 ID 并显示对应的 Tab
                 const targetId = this.getAttribute('data-target');
-                document.getElementById(targetId).classList.add('active');
+                const targetTab = document.getElementById(targetId);
+                
+                if(targetTab) {
+                    // 触发 reflow 确保动画重新执行
+                    void targetTab.offsetWidth;
+                    targetTab.classList.add('active');
+                }
+                
+                // 5. 滚动回顶部
                 document.querySelector('.main-content').scrollTop = 0;
             });
         });

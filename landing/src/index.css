@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00C6FF;
+  --color-primary-dark: #0072FF;
+  --color-primary-light: #e6f7ff;
+  --color-bg-color: #ffffff;
+  --color-bg-secondary: #f7f9fc;
+  --color-text-main: #1A1D20;
+  --color-text-secondary: #5C6670;
+  --color-text-light: #8B95A1;
+  --font-title: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+  
+  --shadow-float: 0 12px 32px rgba(0, 114, 255, 0.08);
+  --shadow-float-hover: 0 24px 64px rgba(0, 114, 255, 0.12);
+}
+
+@layer base {
+  body {
+    @apply bg-bg-color text-text-main font-body antialiased;
+  }
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-dark;
+}
+
+.glass-nav {
+  @apply bg-white/85 backdrop-blur-xl border-b border-black/5;
+}

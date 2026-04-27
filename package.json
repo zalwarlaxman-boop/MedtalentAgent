@@ -1,0 +1,22 @@
+{
+  "name": "medtalent-agent-platform",
+  "version": "1.0.0",
+  "description": "木吾木同医疗智能体演示平台整合包",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd landing && npm install && cd ../demo && npm install && cd ../zheli-wutong && npm install",
+    "dev:landing": "cd landing && npm run dev -- --port 8081",
+    "dev:demo": "cd demo && npm run dev",
+    "dev:wutong": "cd zheli-wutong && npm run dev",
+    "dev:all": "concurrently \"npm run dev:landing\" \"npm run dev:demo\" \"npm run dev:wutong\"",
+    "build:landing": "cd landing && npm run build",
+    "build:demo": "cd demo && npm run build",
+    "build:wutong": "cd zheli-wutong && npm run build",
+    "build:all": "npm run build:landing && npm run build:demo && npm run build:wutong && node scripts/prepare-deploy.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "fs-extra": "^11.3.4",
+    "http-server": "^14.1.1"
+  }
+}
