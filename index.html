@@ -61,14 +61,6 @@
             gap: 10px;
         }
 
-        .logo-icon {
-            width: 28px;
-            height: 28px;
-            background: linear-gradient(135deg, #165DFF, #00D0FF);
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(22, 93, 255, 0.5);
-        }
-
         .nav-menu {
             list-style: none;
             display: flex;
@@ -195,11 +187,13 @@
 
         .section-title::before {
             content: '';
-            display: block;
-            width: 5px;
+            display: inline-block;
+            width: 24px;
             height: 24px;
-            background: var(--primary);
-            border-radius: 4px;
+            background-image: url('./无文字logo.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .text {
@@ -653,9 +647,8 @@
 
     <!-- 侧边栏导航 -->
     <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon"></div>
-            木吾木同 Agent
+        <div class="logo" style="margin-top: 10px;">
+            <img src="./透明底公司logo.png" alt="Medtalent" style="height: 45px; filter: brightness(0) invert(1); object-fit: contain;">
         </div>
         <ul class="nav-menu">
             <li class="nav-item active" data-target="tab-home">🏠 首页</li>
@@ -677,8 +670,10 @@
         <!-- Tab 0: 首页 -->
         <div id="tab-home" class="tab-content active">
             <div class="hero">
+                <!-- 添加带有文字的大 Logo -->
+                <img src="./透明底公司logo.png" alt="Medtalent Agent" style="max-height: 80px; margin-bottom: 20px; filter: brightness(0) invert(1);">
                 <p style="font-size: 24px; margin-bottom: 10px; opacity: 0.9;">有了病，不担心；少生病，更健康</p>
-                <h1 style="font-size: 42px; margin-bottom: 20px;">Medtalent agent 智能体矩阵</h1>
+                <h1 style="font-size: 42px; margin-bottom: 20px;">智能体矩阵生态</h1>
                 <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #ffffff, #36CFC9); margin: 0 auto; border-radius: 2px;"></div>
             </div>
 
