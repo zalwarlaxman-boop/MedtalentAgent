@@ -1145,8 +1145,30 @@
 
             <!-- Interactive Demo 4 -->
             <div class="demo-section" style="background: transparent; border: none; box-shadow: none; margin-top: 0; margin-bottom: 30px; padding: 0;">
-                <div class="mobile-mockup" style="padding: 0; overflow: hidden; background: white;">
-                    <iframe src="./zheli-wutong/dist/index.html" style="width: 100%; height: 100%; border: none;" title="浙里梧桐大众端"></iframe>
+                <div class="mobile-mockup">
+                    <div class="mobile-header">MedlifeClaw 智能管家</div>
+                    <div class="chat-body" id="c-chat-body">
+                        <div class="msg ai">
+                            <div class="msg-content">您好！我是您的专属健康管理伙伴。基于您的健康画像，我能为您提供以下服务，请问今天需要什么帮助？</div>
+                            <div class="ai-footer">
+                                <span>内容由AI生成，仅供参考</span>
+                                <div class="ai-actions">
+                                    <span>🔊</span>
+                                    <span>📋</span>
+                                    <span>👍</span>
+                                    <span>👎</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-options" id="c-chat-options">
+                        <button class="chat-option-btn" onclick="runCEndDemo('体检指标异常，尿酸偏高怎么办？', 'uric_acid')">咨询指标异常</button>
+                        <button class="chat-option-btn" onclick="runCEndDemo('最近总觉得很累，睡眠也不好', 'sleep')">咨询睡眠与疲劳</button>
+                    </div>
+                    <div style="padding: 10px 15px; background: white; display: flex; align-items: center; gap: 10px; border-top: 1px solid #eee;">
+                        <div style="flex: 1; background: #f4f7fb; border-radius: 20px; padding: 10px 15px; color: #999; font-size: 14px;">有什么健康问题需要问...</div>
+                        <div style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; color: #666; font-size: 18px; font-weight: bold;">+</div>
+                    </div>
                 </div>
             </div>
 
@@ -1347,8 +1369,36 @@
                 <h3 class="demo-title">⚕️ AI 自动生成结构化病历</h3>
                 <p class="text" style="font-size: 14px;">模拟医生语音口述病情，AI 自动进行信息结构化提取及鉴别诊断辅助。</p>
                 
-                <div class="emr-demo" style="display: block; height: 800px; border-radius: 12px; overflow: hidden; border: 1px solid #e8f3ff; box-shadow: var(--shadow-sm);">
-                    <iframe src="./demo/dist/index.html" style="width: 100%; height: 100%; border: none;" title="医生端定制"></iframe>
+                <div class="emr-demo">
+                    <!-- 左侧输入 -->
+                    <div class="emr-box">
+                        <h4>🎙️ 医生口述输入</h4>
+                        <textarea class="voice-input" id="b-voice-input" readonly>“患者男，45岁。主诉反复胸闷有一周了，同时伴有心悸不适。没有明显的放射痛。患者既往有高血压病史3年。”</textarea>
+                        <button class="btn-demo" id="b-demo-btn" onclick="runBEndDemo()" style="width: 100%; justify-content: center;">✨ AI 提取结构化病历</button>
+                    </div>
+                    
+                    <!-- 右侧结构化输出 -->
+                    <div class="emr-box">
+                        <h4>📝 结构化电子病历</h4>
+                        <div class="emr-field">
+                            <div class="emr-field-label">【主诉】</div>
+                            <div class="emr-field-value" id="emr-zhusu">等待提取...</div>
+                        </div>
+                        <div class="emr-field">
+                            <div class="emr-field-label">【现病史】</div>
+                            <div class="emr-field-value" id="emr-xianbingshi">等待提取...</div>
+                        </div>
+                        <div class="emr-field">
+                            <div class="emr-field-label">【既往史】</div>
+                            <div class="emr-field-value" id="emr-jiwangshi">等待提取...</div>
+                        </div>
+                        <div class="emr-field" style="margin-top: 20px; border-top: 1px dashed #eee; padding-top: 15px;">
+                            <div class="emr-field-label" style="color: #00C853;">💡 AI 辅助诊断建议</div>
+                            <div class="emr-field-value" id="emr-suggest" style="background: #e8f5e9; border-color: #c8e6c9;">等待生成...</div>
+                            <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">匹配置信度：<span id="emr-conf-text">0%</span></div>
+                            <div class="confidence-bar"><div class="confidence-fill" id="emr-conf"></div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
