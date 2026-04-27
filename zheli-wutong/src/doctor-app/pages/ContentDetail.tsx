@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, LayoutGrid } from "lucide-react";
-import { getContentById } from "@/data/contentCatalog";
-import { cn } from "@/components/Layout";
+import { getContentById } from "@/doctor-app/data/contentCatalog";
+import { cn } from "@/doctor-app/components/Layout";
 
 const typeLabel: Record<string, string> = {
   article: "科普文章",

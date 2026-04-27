@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/components/Layout";
-import { faqCatalog, faqCategories } from "@/data/faqCatalog";
+import { cn } from "@/doctor-app/components/Layout";
+import { faqCatalog, faqCategories } from "@/doctor-app/data/faqCatalog";
 
 export default function Faq() {
   const [faqCategory, setFaqCategory] = useState("全部");

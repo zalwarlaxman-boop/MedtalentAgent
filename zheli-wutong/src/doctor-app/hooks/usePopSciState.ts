@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { PopSciType } from "@/data/popsciCatalog";
+import type { PopSciType } from "@/doctor-app/data/popsciCatalog";
 
 type PopSciKey = `${PopSciType}:${string}`;
 

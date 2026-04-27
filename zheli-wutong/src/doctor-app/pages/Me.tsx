@@ -15,7 +15,7 @@ import {
   UserCheck
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { listNotices } from "@/data/noticeCatalog";
+import { listNotices } from "@/doctor-app/data/noticeCatalog";
 
 export default function Me() {
   const navigate = useNavigate();

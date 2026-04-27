@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PlayCircle, ChevronRight, Eye, ThumbsUp, Heart, Bookmark, BookmarkCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { cn } from "@/components/Layout";
-import { listPopSci, type PopSciItem, type PopSciType } from "@/data/popsciCatalog";
-import { usePopSciState } from "@/hooks/usePopSciState";
+import { cn } from "@/doctor-app/components/Layout";
+import { listPopSci, type PopSciItem, type PopSciType } from "@/doctor-app/data/popsciCatalog";
+import { usePopSciState } from "@/doctor-app/hooks/usePopSciState";
 
 const TABS = ["科普文章", "科普视频", "康复故事"];
 

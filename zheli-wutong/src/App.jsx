@@ -20,7 +20,7 @@ import AgentCluster from './patient-app/pages/AgentCluster';
 
 // 医生端
 import DoctorAppLayout from './doctor-app/components/Layout';
-import Copilot from './doctor-app/pages/Copilot';
+import Home from './doctor-app/pages/Home';
 import Interact from './doctor-app/pages/Interact';
 import PopSci from './doctor-app/pages/PopSci';
 import PopSciDetail from './doctor-app/pages/PopSciDetail';
@@ -58,7 +58,7 @@ export default function App() {
 
         {/* 医生端 (原 demo) */}
         <Route path="doctor/*" element={<DoctorAppLayout />}>
-          <Route index element={<Copilot />} />
+          <Route index element={<Home />} />
           <Route path="interact" element={<Interact />} />
           <Route path="popsci" element={<PopSci />} />
           <Route path="popsci/:id" element={<PopSciDetail />} />
