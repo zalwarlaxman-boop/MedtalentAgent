@@ -30,6 +30,9 @@ import ServiceDetail from './doctor-app/pages/ServiceDetail';
 import Faq from './doctor-app/pages/Faq';
 import Me from './doctor-app/pages/Me';
 
+import PatientTab from './portal-pages/PatientTab';
+import DoctorTab from './portal-pages/DoctorTab';
+
 export default function App() {
   return (
     <Routes>
@@ -39,35 +42,11 @@ export default function App() {
         <Route path="os" element={<OsTab />} />
         <Route path="knowledge" element={<KnowledgeTab />} />
         
-        {/* 大众端 (原 zheli-wutong) */}
-        <Route path="patient/*" element={
-          <HealthDataProvider>
-            <PatientAppLayout />
-          </HealthDataProvider>
-        }>
-          <Route index element={<Dashboard />} />
-          <Route path="chat" element={<Interaction />} />
-          <Route path="profile" element={<HealthProfile />} />
-          <Route path="weight" element={<WeightTracking />} />
-          <Route path="dietitians" element={<Dietitians />} />
-          <Route path="experts" element={<Experts />} />
-          <Route path="goods" element={<Goods />} />
-          <Route path="hospital" element={<Hospital />} />
-          <Route path="cluster" element={<AgentCluster />} />
-        </Route>
+        {/* 大众端 (原 zheli-wutong) 作为一个整体嵌在 PatientTab 内部 */}
+        <Route path="patient/*" element={<PatientTab />} />
 
-        {/* 医生端 (原 demo) */}
-        <Route path="doctor/*" element={<DoctorAppLayout />}>
-          <Route index element={<Home />} />
-          <Route path="interact" element={<Interact />} />
-          <Route path="popsci" element={<PopSci />} />
-          <Route path="popsci/:id" element={<PopSciDetail />} />
-          <Route path="content/:id" element={<ContentDetail />} />
-          <Route path="service" element={<Service />} />
-          <Route path="service/:id" element={<ServiceDetail />} />
-          <Route path="faq" element={<Faq />} />
-          <Route path="me" element={<Me />} />
-        </Route>
+        {/* 医生端 (原 demo) 作为一个整体嵌在 DoctorTab 内部 */}
+        <Route path="doctor/*" element={<DoctorTab />} />
       </Route>
     </Routes>
   );

@@ -20,14 +20,14 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="flex flex-col h-screen max-w-[480px] mx-auto bg-[#faf9f5] overflow-hidden shadow-2xl relative">
-      {/* Main Content Area */}
+    <div className="flex flex-col h-full w-full bg-[#faf9f5] overflow-hidden">
+      {/* Main Content Area - 限定在手机模拟器内部滚动 */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden relative">
         <Outlet />
       </main>
 
-      {/* Bottom Navigation Bar */}
-      <nav className="bg-white border-t border-[#e8e6dc] flex items-center justify-around h-[68px] px-2 shrink-0 pb-safe">
+      {/* Bottom Navigation */}
+      <nav className="bg-white border-t border-[#e8e6dc] flex items-center justify-around h-[68px] px-2 shrink-0 pb-safe z-50">
         {navItems.map((item) => {
           const isActive = item.path === "/doctor" ? location.pathname === "/doctor" : location.pathname === item.path || location.pathname.startsWith(`${item.path}/`);
           return (
