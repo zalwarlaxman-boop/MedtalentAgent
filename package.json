@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.3.4",
     "http-server": "^14.1.1"
   }
 }
