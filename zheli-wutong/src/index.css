@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-wutong-dark: #1b4332;
+  --color-wutong-primary: #2d6a4f;
+  --color-wutong-light: #40916c;
+  --color-wutong-soft: #d8f3dc;
+  --color-wutong-bg: #f4fbf7;
+  --color-wutong-accent: #52b788;
+  --font-serif: "Noto Serif SC", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-wutong-bg);
+    color: #1a1a1a;
+    font-family: var(--font-sans);
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(216, 243, 220, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 85% 30%, rgba(82, 183, 136, 0.15) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-wutong-soft);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-wutong-light);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(45, 106, 79, 0.08);
+  border-radius: 1.5rem;
+}
+
+.glass-card-dark {
+  background: linear-gradient(135deg, var(--color-wutong-primary) 0%, var(--color-wutong-dark) 100%);
+  color: white;
+  box-shadow: 0 10px 40px rgba(27, 67, 50, 0.2);
+  border-radius: 1.5rem;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
