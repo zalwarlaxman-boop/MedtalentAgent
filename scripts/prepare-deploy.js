@@ -8,9 +8,10 @@ async function prepare() {
   // 1. 清理 dist 目录
   await fs.emptyDir(distDir);
   
-  // 2. 复制 index.html 到 root
+  // 2. 复制 landing 产物作为 root
+  console.log('复制 landing (React主页) 产物...');
   await fs.ensureDir(path.join(distDir, 'root'));
-  await fs.copy(path.join(__dirname, '../index.html'), path.join(distDir, 'root/index.html'));
+  await fs.copy(path.join(__dirname, '../landing/dist'), path.join(distDir, 'root'));
   
   // 3. 复制 demo 产物
   console.log('复制 demo 产物...');
