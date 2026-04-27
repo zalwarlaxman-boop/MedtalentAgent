@@ -52,10 +52,10 @@ export default function AppLayout() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="h-full w-full relative bg-gray-50 overflow-hidden">
       {/* ===== Desktop Sidebar ===== */}
       <div
-        className="hidden md:block fixed left-0 top-0 h-screen z-50"
+        className="hidden md:block absolute left-0 top-0 h-full z-50"
         onMouseEnter={openSidebar}
         onMouseLeave={closeSidebar}
       >
@@ -215,7 +215,7 @@ export default function AppLayout() {
       </AnimatePresence>
 
       {/* ===== Main Content ===== */}
-      <main className="min-h-screen p-4 md:p-8 md:ml-16 max-w-[1600px] mx-auto">
+      <main className="h-full p-4 md:p-8 md:ml-16 overflow-y-auto">
         <Outlet />
       </main>
     </div>

@@ -1,13 +1,1657 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>zheli-wutong</title>
-  </head>
-  <body>
-    <div id="root"></div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木吾木同 Medtalent Agent - 医疗智能体演示平台</title>
+    <style>
+        :root {
+            --primary: #165DFF;
+            --primary-dark: #0E42D2;
+            --primary-light: #e8f3ff;
+            --bg-color: #f4f7fb;
+            --sidebar-bg: #0A1628;
+            --sidebar-hover: #1A2A42;
+            --text-main: #1D2129;
+            --text-secondary: #4E5969;
+            --text-light: #86909C;
+            --white: #ffffff;
+            --font-title: "STZhongsong", "华文中宋", serif;
+            --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(22, 93, 255, 0.08);
+            --shadow-lg: 0 16px 48px rgba(22, 93, 255, 0.12);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 22px;
+            margin-bottom: 40px;
+            text-align: center;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #165DFF, #00D0FF);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(22, 93, 255, 0.5);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-item {
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-item:hover {
+            background-color: var(--sidebar-hover);
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            scroll-behavior: smooth;
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 1100px;
+            margin: 0 auto;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            transform: rotate(30deg);
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 38px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 5px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+        /* Cards */
+        .card {
+            background: var(--primary-light);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(22, 93, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            background: var(--white);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .card li { margin-bottom: 6px; line-height: 1.6; }
+
+        /* Tags */
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .tag {
+            padding: 6px 14px;
+            background: var(--white);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .tag:hover { background: var(--primary); color: var(--white); }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid #eee;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            font-size: 14px;
+        }
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        th {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        tr:hover td { background: #fafbfc; }
+
+        /* Level Items */
+        .level-item {
+            padding: 20px;
+            border: 1px solid #e8f3ff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #fafbfc;
+        }
+        .level-item h3 { color: var(--primary); margin-bottom: 8px; font-size: 18px; }
+
+        /* Data Showcase */
+        .data-showcase { text-align: center; padding: 15px; background: #f9fbff; border-radius: 12px;}
+        .data-num { font-size: 32px; font-weight: bold; color: var(--primary); margin-bottom: 5px; font-family: var(--font-title); }
+        .data-label { color: var(--text-secondary); font-size: 14px; }
+
+        /* --- Interactive Demo UI Styles --- */
+        .demo-section {
+            background: linear-gradient(to bottom right, #ffffff, #f9fbff);
+            border: 1px solid rgba(22, 93, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .demo-badge {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            border-bottom-left-radius: var(--radius-md);
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        .demo-title {
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-title);
+        }
+        .btn-demo {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-demo:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+        .btn-demo:disabled { background: #c9d6f0; cursor: not-allowed; transform: none; box-shadow: none;}
+        
+        /* Chat UI */
+        .chat-ui {
+            background: var(--bg-color);
+            border-radius: var(--radius-md);
+            border: 1px solid #eee;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 20px 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: transparent;
+        }
+        .msg {
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        .msg.user {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            border-bottom-right-radius: 4px;
+            max-width: 80%;
+        }
+        .msg.ai {
+            align-self: stretch;
+            background: white;
+            color: var(--text-main);
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            width: 100%;
+        }
+        .ai-footer {
+            font-size: 11px;
+            color: #b0b8c4;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ai-actions {
+            display: flex;
+            gap: 12px;
+            color: #86909c;
+        }
+        .ai-actions span { cursor: pointer; transition: color 0.2s; }
+        .ai-actions span:hover { color: var(--primary); }
+        .chat-input-area {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+        .chat-input-area input:focus { border-color: var(--primary); }
+
+        /* Mobile Mockup & C-End Demo */
+        .mobile-mockup {
+            width: 380px;
+            height: 720px;
+            border: 12px solid #1a1a1a;
+            border-radius: 40px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #e6f0ff 0%, #f4f7fb 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-header {
+            background: white;
+            padding: 18px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+            border-bottom: 1px solid #eee;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .mobile-header::before {
+            content: '🩺';
+            font-size: 20px;
+        }
+        
+        /* 推送卡片样式 */
+        .push-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+        .push-card-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .push-card-content {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .push-card-btn {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+        }
+        .push-card-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 15px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+        .chat-option-btn {
+            background: #f0f7ff;
+            color: var(--primary);
+            border: 1px solid #cce0ff;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chat-option-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Typing indicator */
+        .typing { display: flex; gap: 4px; align-items: center; height: 20px; }
+        .typing span { width: 6px; height: 6px; background: var(--text-light); border-radius: 50%; animation: blink 1.4s infinite both; }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* OS Workflow Demo */
+        .workflow-demo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            position: relative;
+            padding: 0 30px;
+        }
+        .workflow-demo::before {
+            content: '';
+            position: absolute;
+            top: 30px; left: 60px; right: 60px;
+            height: 4px;
+            background: #eee;
+            z-index: 1;
+        }
+        .wf-step-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .wf-step {
+            background: white;
+            border: 3px solid #eee;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--text-light);
+            transition: var(--transition);
+            font-size: 18px;
+        }
+        .wf-step.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 20px rgba(22,93,255,0.4);
+            transform: scale(1.1);
+        }
+        .wf-label {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+        .wf-log {
+            margin-top: 40px;
+            background: #0A1628;
+            color: #00E676;
+            font-family: "Consolas", monospace;
+            padding: 20px;
+            border-radius: 12px;
+            height: 180px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Knowledge Search Demo */
+        .search-demo-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-demo-bar input {
+            flex: 1;
+            padding: 16px 24px;
+            border: 2px solid #e8f3ff;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+            background: #fafbfc;
+        }
+        .search-demo-bar input:focus { border-color: var(--primary); background: white; }
+        .knowledge-result {
+            background: white;
+            border: 1px solid #e8f3ff;
+            border-radius: 12px;
+            padding: 24px;
+            display: none;
+            box-shadow: var(--shadow-sm);
+        }
+        .knowledge-result.show { display: block; animation: slideIn 0.4s ease-out forwards; }
+        .source-tag { display: inline-block; background: #e8f3ff; color: var(--primary); padding: 4px 10px; border-radius: 4px; font-size: 12px; margin-right: 8px; margin-bottom: 10px;}
+
+        /* Doctor EMR Demo */
+        .emr-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .emr-box { background: white; border: 1px solid #e8f3ff; border-radius: 12px; padding: 24px; box-shadow: var(--shadow-sm);}
+        .emr-box h4 { color: var(--primary-dark); margin-bottom: 15px; font-size: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px;}
+        .voice-input { width: 100%; height: 120px; border: 1px solid #ddd; border-radius: 8px; padding: 15px; resize: none; font-family: inherit; margin-bottom: 15px; font-size: 15px; line-height: 1.6;}
+        .voice-input:focus { border-color: var(--primary); outline: none; }
+        .emr-field { margin-bottom: 15px; }
+        .emr-field-label { font-weight: bold; color: var(--primary); font-size: 13px; margin-bottom: 5px; }
+        .emr-field-value { background: #fafbfc; padding: 12px; border-radius: 6px; font-size: 14px; min-height: 44px; color: var(--text-main); border: 1px solid #f0f0f0;}
+        .confidence-bar { height: 6px; background: #eee; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .confidence-fill { height: 100%; background: linear-gradient(90deg, #00E676, #00C853); width: 0; transition: width 1s ease-out; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; padding: 15px 20px; flex-direction: row; align-items: center; justify-content: space-between; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.1); height: auto;}
+            .logo { margin-bottom: 0; font-size: 18px; }
+            .nav-menu { flex-direction: row; gap: 8px; overflow-x: auto; }
+            .nav-item { padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+            .sidebar-footer { display: none; }
+            .main-content { padding: 20px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .emr-demo { grid-template-columns: 1fr; }
+            .workflow-demo { flex-direction: column; gap: 20px; }
+            .workflow-demo::before { display: none; }
+            .wf-label { margin-top: 0; margin-left: 15px; }
+            .wf-step-container { flex-direction: row; width: 100%; justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 侧边栏导航 -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            木吾木同 Agent
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-target="tab-home">🏠 首页</li>
+            <li class="nav-item" data-target="tab-overview">🌐 1+N 智能体矩阵</li>
+            <li class="nav-item" data-target="tab-os">⚙️ Agent OS 底座</li>
+            <li class="nav-item" data-target="tab-knowledge">📚 智能健康知识引擎</li>
+            <li class="nav-item" data-target="tab-c-end">👥 面向大众端场景 - 自有平台</li>
+            <li class="nav-item" data-target="tab-b-end">⚕️ 面向医生端场景 - 专项定制</li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>© 2026 Medtalent Inc.</p>
+            <p>生活方式医学 AI 平台</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <!-- Tab 0: 首页 -->
+        <div id="tab-home" class="tab-content active">
+            <div class="hero">
+                <p style="font-size: 24px; margin-bottom: 10px; opacity: 0.9;">有了病，不担心；少生病，更健康</p>
+                <h1 style="font-size: 42px; margin-bottom: 20px;">Medtalent agent 智能体矩阵</h1>
+                <div style="width: 80px; height: 4px; background: linear-gradient(90deg, #ffffff, #36CFC9); margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
+            <div class="section" style="text-align: center; padding: 60px 40px;">
+                <p class="text" style="font-size: 20px; color: #34495e; margin-bottom: 40px;">
+                    我们坚信，这是一个值得全力以赴的伟大创业项目，坚持以服务群众为初心，让优质健康服务触手可及！
+                </p>
+
+                <h2 class="section-title" style="justify-content: center; margin-bottom: 30px;">我们的使命与价值</h2>
+                <ul style="list-style: none; padding: 0; font-size: 18px; color: #2c3e50; display: inline-block; text-align: left;">
+                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
+                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
+                        在人工智能浪潮汹涌袭来的时刻，我们站在前沿科技的浪尖之上
+                    </li>
+                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
+                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
+                        通过技术创新助力医学科普产业化高质量推进
+                    </li>
+                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
+                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
+                        助力医生搭建智能体体系，高效链接广大群众
+                    </li>
+                    <li style="margin: 15px 0; position: relative; padding-left: 25px;">
+                        <span style="color: #36CFC9; font-size: 24px; position: absolute; left: 0; top: -5px;">•</span>
+                        助力百姓轻松获得触手可及的全周期健康管理服务
+                    </li>
+                </ul>
+
+                <p class="text" style="font-size: 19px; font-weight: 500; color: var(--primary); margin-top: 50px; line-height: 1.8;">
+                    推动全民健康理念升级：从被动治疗走向主动健康，从病后管理走向事先预防，全方位助力中国老百姓提升健康认知，守护全民健康！
+                </p>
+            </div>
+        </div>
+
+        <!-- Tab 1: 1+N 智能体矩阵 -->
+        <div id="tab-overview" class="tab-content">
+            <div class="hero">
+                <h1>Medtalent Agent - 1+N-PLAN</h1>
+                <h2 style="font-size: 26px; font-weight: normal; opacity: 0.95; margin-bottom: 10px;">AI智能体矩阵</h2>
+                <p>聚焦“AI+生活医学”核心赛道 · 技术赋能 + 商业变现双闭环</p>
+            </div>
+            
+            <!-- Interactive Demo 1 -->
+            <div class="demo-section" style="margin-top: 0; margin-bottom: 40px;">
+                <div class="demo-badge">互动演示</div>
+                <h3 class="demo-title">🎯 1+N 智能路由中枢演示</h3>
+                <p class="text" style="font-size: 14px;">模拟通用基座接收用户自然语言，精准路由至对应垂直智能体的过程。</p>
+                
+                <div class="chat-ui" style="height: auto;">
+                    <div class="chat-input-area">
+                        <input type="text" id="routing-input" value="我最近每天晚上翻来覆去睡不着，白天头特别晕，该怎么办？" readonly>
+                        <button class="btn-demo" id="routing-btn" onclick="runRoutingDemo()">发起咨询 🚀</button>
+                    </div>
+                    <div class="chat-body" id="routing-log" style="min-height: 150px; display: none;">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">平台定位</h2>
+                <p class="text">
+                    聚焦“AI+生活医学”核心赛道，以自研Medtalent Agent底座为核心，推出“1+N”计划。打造“1个通用基座+N个垂直智能体+N个专家智能体”。通过人工智能技术与权威医学知识的联动，覆盖服务C端大众、B端医生（包括医疗机构），实现“技术赋能+商业变现”双闭环，打造不可复制的行业竞争力。
+                </p>
+
+                <h2 style="text-align:center; font-size:30px; color:var(--primary); margin:40px 0;">木吾木同</h2>
+                <p class="text" style="text-align:center;">
+                    全新一代生活方式医学AI-AGENT底座开发<br>
+                    助力医学科普产业化｜助力医生建设医生智能体｜助力百姓触手可及健康管理｜重塑健康未来
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">智能体Agent集群底座</h2>
+                <ul class="text" style="padding-left:30px;">
+                    <li>融合100+基于权威医学知识库的专业智能体，以循证数据为基础，驱动“数据支持+运营管理”双效合一，构建智慧健康管理新模式。</li>
+                    <li>联结2351多名主任级医生专家知识底座</li>
+                    <li>自有开发Medtalent agent方法论，融合ocr、rag、孪生、大模型等技术，打造覆盖L1-L5五级进化体系的智能引擎，可实现私有化部署，支持多租户SaaS模式</li>
+                </ul>
+            </div>
+
+            <div class="section" style="text-align:center; background:linear-gradient(135deg,#f0f7ff,#fff);">
+                <h2 style="font-size:28px; color:var(--primary); margin-bottom:20px;">浙里健康</h2>
+                <div class="tags" style="justify-content: center;">
+                    <span class="tag" style="font-size: 16px; padding: 10px 20px;">24个科普分库</span>
+                    <span class="tag" style="font-size: 16px; padding: 10px 20px;">2351+主任级专家</span>
+                    <span class="tag" style="font-size: 16px; padding: 10px 20px;">专家知识的力量</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心场景：大众、医生全闭环AI赋能</h2>
+                <p class="text">大众患者、大众患者、管理机构，木吾木同Medtalent Agent 都能提供专属价值。</p>
+
+                <div class="grid-2">
+                    <!-- 大众百姓 -->
+                    <div class="card">
+                        <h3>为大众百姓</h3>
+                        <p style="margin-bottom:15px; font-size:16px; color: var(--text-main);"><strong>MED-Life Style Claw——生活方式医学智能体空间</strong></p>
+                        <ul>
+                            <li>自然语言对话互动，高效获取健康资讯</li>
+                            <li>构建使用者健康画像，动态孪生，智能体自动匹配</li>
+                            <li>匹配推送健康信息</li>
+                            <li>构建动态打卡跟踪管理生态</li>
+                            <li>推送非医类专业健康用品</li>
+                            <li>联结医生矩阵相关科普知识</li>
+                            <li>打通专业医生、医院智能体</li>
+                        </ul>
+                    </div>
+
+                    <!-- 医生 -->
+                    <div class="card">
+                        <h3>为医生</h3>
+                        <p style="margin-bottom:15px; font-size:16px; color: var(--text-main);"><strong>DOCTOR VOICE AGENT-医声智能体空间</strong></p>
+                        <ul>
+                            <li>释放医生潜能，专注核心医疗</li>
+                            <li>自动生成结构化电子病历，减少书写时间</li>
+                            <li>AI辅助鉴别诊断，降低漏诊误诊风险</li>
+                            <li>智能检索医学文献，实时获取最新指南</li>
+                            <li>自动随访管理，提高患者依从性</li>
+                            <li>健康画像跟踪提醒，建立患者健康管理习惯</li>
+                            <li>精准推送资讯套餐，助力患者提高健康认知</li>
+                            <li>对应匹配健康套餐、产品，助力知识智慧阳光变现</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心能力</h2>
+                <ol class="text" style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>AI Agent引擎：</strong>100+专业AI Agent智能编排，覆盖L1-L5五级体系。</li>
+                    <li style="margin-bottom: 10px;"><strong>智能数据辅助：</strong>基于医学知识库的智能数据建议，提升催工效率。</li>
+                    <li style="margin-bottom: 10px;"><strong>医疗级风控：</strong>双重安全审核机制，确保医疗内容合规安全。</li>
+                    <li style="margin-bottom: 10px;"><strong>多租户SaaS：</strong>支持超级管理员、机构管理员、医生、患者多级角色。</li>
+                    <li style="margin-bottom: 10px;"><strong>全周期管理：</strong>从预防到康复的全生命周期健康管理。</li>
+                    <li style="margin-bottom: 10px;"><strong>患者记忆系统：</strong>向患者数据库存储患者历史，提供个性化服务。</li>
+                </ol>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">企业级技术架构</h2>
+                <p class="text">安全、稳定、可扩展的云原生微服务架构</p>
+                
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3>用户接入层</h3>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• Web / Mobile / IoT / API</p>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">负载均衡 | 身份认证 | 流量控制 | 安全审计</p>
+                </div>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3>业务能力层</h3>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• 业务中台：用户中心 | 机构管理 | 问诊系统 | 病历中心 | 知识库管理 | 消息通知</p>
+                </div>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3>AI Agent引擎</h3>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• Orchestrator：任务编排与场景</p>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• LLM Core：多模态 Core（GPT / Claude / llama）</p>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• Memory：长期记忆与上下文管理</p>
+                </div>
+                <div class="card">
+                    <h3>数据存储层</h3>
+                    <p class="text" style="font-size: 14px; margin-bottom: 0;">• MySQL | Redis | MongoDB | Vector DB | Object Storage</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">常见问题解答</h2>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">• 了解多久上线木吾木同Agent OS的知识</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">• 木吾木同Agent OS的知识安全如何保障</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">• 木吾木同Agent OS的制度安全性如何</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">• AI诊断建议的准确性如何？</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;">• 运营管理需要多长时间？</div>
+            </div>
+
+            <div class="section" style="text-align:center; background:#f9fbff;">
+                <h2 class="section-title" style="justify-content: center;">联系我们</h2>
+                <p class="text">立即加入木吾木同Agent OS，体验AI为医疗带来的无限可能。</p>
+            </div>
+        </div>
+
+        <!-- Tab 2: Agent OS 底座 -->
+        <div id="tab-os" class="tab-content">
+            <div class="hero">
+                <h1>木吾木同Medtalent agent 底座</h1>
+                <div style="font-size: 24px; margin-bottom: 8px;">基于 Multi-Agent 协作架构</div>
+                <div style="font-size: 20px; opacity: 0.9;">列阵· 专业医疗Agent · 协同工作的智能操作系统</div>
+            </div>
+
+            <!-- Interactive Demo 2 -->
+            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px;">
+                <div class="demo-badge">互动演示</div>
+                <h3 class="demo-title">⚙️ L1-L5 全链路处理引擎演示</h3>
+                <p class="text" style="font-size: 14px;">模拟多 Agent 协作系统处理一份真实体检报告的全过程。</p>
+                <button class="btn-demo" id="os-demo-btn" onclick="runOsDemo()">▶️ 模拟处理体检报告</button>
+                
+                <div class="workflow-demo">
+                    <div class="wf-step-container">
+                        <div class="wf-step" id="wf-s1">L1</div>
+                        <div class="wf-label">基础感知层<br>(OCR提取)</div>
+                    </div>
+                    <div class="wf-step-container">
+                        <div class="wf-step" id="wf-s2">L2</div>
+                        <div class="wf-label">知识检索层<br>(RAG检索)</div>
+                    </div>
+                    <div class="wf-step-container">
+                        <div class="wf-step" id="wf-s3">L3</div>
+                        <div class="wf-label">逻辑推理层<br>(辅助诊断)</div>
+                    </div>
+                    <div class="wf-step-container">
+                        <div class="wf-step" id="wf-s4">L4</div>
+                        <div class="wf-label">决策执行层<br>(方案生成)</div>
+                    </div>
+                    <div class="wf-step-container">
+                        <div class="wf-step" id="wf-s5">L5</div>
+                        <div class="wf-label">元认知监控层<br>(合规审查)</div>
+                    </div>
+                </div>
+                
+                <div class="wf-log" id="wf-log">
+                    [System] 等待指令...
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="text">
+                    木吾木同Medtalent agent os并非基础的对话工具，而是汇聚10余个垂直领域专精AI Agent的智能生态集群。其运作模式对标医院专家团队，通过精准分工、交叉校验，为医疗场景输出专业、严谨、可靠的决策支撑。
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">L1-L5 智能进化体系</h2>
+                <p class="text">从基础数据感知到元认知监控，构建完整的医疗AI能力层级。</p>
+                <div class="level-item">
+                    <h3>L1 基础感知层</h3>
+                    <p class="text" style="margin-bottom: 8px;">承担多模态医疗数据的采集与标准化处理，覆盖电子病历、影像资料、生命体征等全维度信息。</p>
+                    <ul style="padding-left: 20px; color: var(--text-secondary);">
+                        <li>OCR识别Agent</li>
+                        <li>ASR语音转写Agent</li>
+                        <li>数据清洗Agent</li>
+                        <li>结构化提取Agent</li>
+                    </ul>
+                </div>
+                <div class="level-item">
+                    <h3>L2 知识检索层</h3>
+                    <p class="text" style="margin-bottom: 8px;">依托RAG技术，从海量医学指南、学术文献及专业知识库中精准提取有效信息。</p>
+                    <ul style="padding-left: 20px; color: var(--text-secondary);">
+                        <li>指南检索Agent</li>
+                        <li>药物相互作用Agent</li>
+                        <li>循证医学Agent</li>
+                        <li>术语标准化Agent</li>
+                    </ul>
+                </div>
+                <div class="level-item">
+                    <h3>L3 逻辑推理层</h3>
+                    <p class="text" style="margin-bottom: 8px;">模拟临床医生思维逻辑，完成病情分析、鉴别诊断与风险评估，输出初步诊疗建议。</p>
+                    <ul style="padding-left: 20px; color: var(--text-secondary);">
+                        <li>辅助诊断Agent</li>
+                        <li>风险评估Agent</li>
+                        <li>临床路径匹配Agent</li>
+                        <li>检查推荐Agent</li>
+                    </ul>
+                </div>
+                <div class="level-item">
+                    <h3>L4 决策执行层</h3>
+                    <p class="text" style="margin-bottom: 8px;">生成可落地的医疗文书、处方方案与随访计划，实现与HIS系统的无缝对接。</p>
+                    <ul style="padding-left: 20px; color: var(--text-secondary);">
+                        <li>病历生成Agent</li>
+                        <li>处方审核Agent</li>
+                        <li>随访计划Agent</li>
+                        <li>转诊决策Agent</li>
+                    </ul>
+                </div>
+                <div class="level-item">
+                    <h3>L5 元认知监控层</h3>
+                    <p class="text" style="margin-bottom: 8px;">对AI输出结果开展自我复盘、合规性审查与伦理风险管控。</p>
+                    <ul style="padding-left: 20px; color: var(--text-secondary);">
+                        <li>医疗合规Agent</li>
+                        <li>伦理审查Agent</li>
+                        <li>质量控制Agent</li>
+                        <li>偏见纠正Agent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">全科室覆盖的专业Agent</h2>
+                <p class="text" style="text-align: center;">覆盖四大核心领域，100+细分场景，打造医疗全流程智能闭环。</p>
+                <div class="grid-4">
+                    <div class="card">
+                        <h3>医学辅助类</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 10px;">含5大核心Agent</p>
+                        <ul>
+                            <li>全科分诊Agent</li>
+                            <li>影像阅片Agent</li>
+                            <li>心电图分析Agent</li>
+                            <li>病理分析Agent</li>
+                            <li>肿瘤MDT Agent</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>药学服务类</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 10px;">含5大核心Agent</p>
+                        <ul>
+                            <li>合理用药Agent</li>
+                            <li>药物相互作用Agent</li>
+                            <li>药代动力学Agent</li>
+                            <li>剂量计算Agent</li>
+                            <li>Adverse事件Agent</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>健康管理类</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 10px;">含5大核心Agent</p>
+                        <ul>
+                            <li>慢病随访Agent</li>
+                            <li>营养膳食Agent</li>
+                            <li>运动康复Agent</li>
+                            <li>心理评估Agent</li>
+                            <li>健康风险评估Agent</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>科研辅助类</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 10px;">含5大核心Agent</p>
+                        <ul>
+                            <li>文献综述Agent</li>
+                            <li>数据统计Agent</li>
+                            <li>科研课题Agent</li>
+                            <li>论文润色Agent</li>
+                            <li>实验推演Agent</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section" style="text-align: center;">
+                <h2 class="section-title" style="justify-content: center;">专属定制服务</h2>
+                <p class="text">
+                    木吾木同Medtalent agent os为医疗机构提供定制化解决方案<br>
+                    支持快速接入私有知识库，训练专属医疗智能体系
+                </p>
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+                    <a href="#" class="btn-demo" style="text-decoration: none;">申请演示 100+ Agent</a>
+                    <a href="#" class="btn-demo" style="text-decoration: none;">申请演示</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: 智能健康知识引擎 -->
+        <div id="tab-knowledge" class="tab-content">
+            <div class="hero">
+                <h1>木吾木同Medtalent agent os</h1>
+                <p>基于 Multi-Agent 协作架构</p>
+            </div>
+
+            <!-- Interactive Demo 3 -->
+            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px;">
+                <div class="demo-badge">互动演示</div>
+                <h3 class="demo-title">📚 RAG 循证医学知识检索</h3>
+                <p class="text" style="font-size: 14px;">模拟在海量知识库中进行大模型语义检索，提供可溯源的权威医学结论。</p>
+                
+                <div class="search-demo-bar">
+                    <input type="text" value="二甲双胍的主要禁忌症有哪些？" readonly>
+                    <button class="btn-demo" id="search-btn" onclick="runSearchDemo()">🔍 智能检索</button>
+                </div>
+                
+                <div class="knowledge-result" id="knowledge-result">
+                    <div id="knowledge-content"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">智能健康知识引擎</h2>
+                <p class="text">
+                    收录超 5000 万条权威医学数据，基于大模型与知识图谱技术，为健康专业人士提供精准、权威、实时的专业知识检索与辅助决策支持。
+                </p>
+                <p class="text"><strong>浙江省健康科普专家库分库</strong> 2351名主任级专家知识底座</p>
+                <p class="text" style="font-weight: bold;">浙里健康24个专业分库：</p>
+                <div class="tags">
+                    <span class="tag">老年健康科普分库</span><span class="tag">眼底健康科普分库</span><span class="tag">头颈甲状腺外科科普分库</span>
+                    <span class="tag">结核病防治科普分库</span><span class="tag">艾滋病防治科普分库</span><span class="tag">免疫规划科普分库</span>
+                    <span class="tag">口腔保健科普分库</span><span class="tag">中医保健科普专家</span><span class="tag">慢病(体)理科普分库</span>
+                    <span class="tag">乳腺外科科普分库</span><span class="tag">控烟科普分库</span><span class="tag">近视防控科普分库</span>
+                    <span class="tag">心理健康科普分库</span><span class="tag">肿瘤防治科普分库</span><span class="tag">妇女保健科科普分库</span>
+                    <span class="tag">儿童保健科普分库</span><span class="tag">心血管科普分库</span><span class="tag">颈肩腰腿病保健科普分库</span>
+                    <span class="tag">肿瘤与营养科普分库</span><span class="tag">骨科健康科普分库</span><span class="tag">皮肤病与医学美容科普分库</span>
+                    <span class="tag">呼吸健康分库</span><span class="tag">护理科普分库</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心知识模块</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>临床指南</h3>
+                        <p class="text" style="font-size: 14px;">• 覆盖 2500+ 权威机构发布的最新临床诊疗指南与专家共识</p>
+                        <p class="text" style="font-size: 14px;">• 支持目录浏览，快速定位对应诊疗规范</p>
+                    </div>
+                    <div class="card">
+                        <h3>药品百科</h3>
+                        <p class="text" style="font-size: 14px;">• 涵盖 15000+ 处方药、OTC 及中成药的详细说明书与相互作用说明</p>
+                        <p class="text" style="font-size: 14px;">• 提供目录浏览，方便查询药品信息</p>
+                    </div>
+                    <div class="card">
+                        <h3>医学知识图谱</h3>
+                        <p class="text" style="font-size: 14px;">• 包含 8000+ 基于知识图谱构建的疾病关联分析与病理机制内容</p>
+                        <p class="text" style="font-size: 14px;">• 支持目录浏览，直观理解疾病间的逻辑关系</p>
+                    </div>
+                    <div class="card">
+                        <h3>健康检测</h3>
+                        <p class="text" style="font-size: 14px;">• 覆盖 3000+ 各类医学检验项目解读、正常值范围及临床意义</p>
+                        <p class="text" style="font-size: 14px;">• 提供目录浏览，助力快速解读检验报告</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心能力</h2>
+                <div class="level-item">
+                    <h3>RAG 检索增强</h3>
+                    <p class="text">结合大模型语义理解与精准检索，输出精准、可溯源的知识问答，避免信息偏差。</p>
+                </div>
+                <div class="level-item">
+                    <h3>循证医学支持</h3>
+                    <p class="text">所有内容均标注权威来源（如 UpToDate、PubMed），确保医疗信息的可信度与专业性。</p>
+                </div>
+                <div class="level-item">
+                    <h3>实时动态更新</h3>
+                    <p class="text">自动追踪全球顶级医学期刊与卫生公告，持续更新知识库，保障知识时效性。</p>
+                </div>
+                <div class="level-item">
+                    <h3>多模态解析</h3>
+                    <p class="text">支持医学影像（CT/MRI）、病理切片及心电图等多模态数据检索，满足复杂临床场景需求。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">最新收录动态</h2>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;"><span style="color: #999; margin-right: 10px;">2026-02-26</span>指南：2026年高血压防治指南更新解读</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;"><span style="color: #999; margin-right: 10px;">2026-02-24</span>药物：新型GLP-1受体激动剂临床应用专家共识</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;"><span style="color: #999; margin-right: 10px;">2026-02-20</span>技术：人工智能在肺结节早期筛查中的应用规范</div>
+                <div class="text" style="border-bottom: 1px dashed #eee; padding-bottom: 10px; margin-bottom: 10px;"><span style="color: #999; margin-right: 10px;">2026-02-15</span>政策：关于印发《国家基本药物目录（2025年版）》的通知</div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">开放能力与服务</h2>
+                <div class="level-item">
+                    <h3>知识库 API 接入</h3>
+                    <p class="text">提供标准 RESTful API，支持企业级私有化部署，可快速集成至现有医疗系统。</p>
+                </div>
+                <div style="margin-top: 30px;">
+                    <h3 style="font-size:21px; color:var(--primary); margin-bottom:15px;">数据合作</h3>
+                    <p class="text">我们诚邀医疗机构、科研院所及出版集团开展数据共建与知识共享。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: 大众端平台 -->
+        <div id="tab-c-end" class="tab-content">
+            <div class="hero">
+                <h1>智能体1+N开发计划 · 自有平台开发</h1>
+                <div style="font-size: 24px; margin-bottom: 8px;">面向大众百姓｜MedlifeClaw——生活方式医学AI智能体平台</div>
+                <div style="font-size: 18px; opacity: 0.9;">生活方式跟随式AI · 主动健康管理 · 全民健康责任第一步<br>全场景覆盖个性化健康需求，深耕循证生活方式干预，做全民专属全周期健康伙伴</div>
+            </div>
+
+            <!-- Interactive Demo 4 -->
+            <div class="demo-section" style="background: transparent; border: none; box-shadow: none; margin-top: 0; margin-bottom: 30px; padding: 0;">
+                <div class="mobile-mockup" style="overflow: hidden; padding: 0;">
+                    <div id="patient-app-root" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心信任数据</h2>
+                <div class="grid-4">
+                    <div class="data-showcase">
+                        <div class="data-num">X万+</div>
+                        <div class="data-label">注册用户</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num">2351名</div>
+                        <div class="data-label">主任级合作名医</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num">24大</div>
+                        <div class="data-label">垂直健康场景</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num">X%</div>
+                        <div class="data-label">用户满意度</div>
+                    </div>
+                </div>
+                <p class="text" style="font-weight: bold; margin-top: 20px;">官方专家库硬核背书 + 顶级名医资源壁垒 + 全维度专业分库，构筑业内不可复制的核心竞争力</p>
+                <p class="text">平台彻底摒弃普通健康类平台内容非专业、无权威背书的行业通病，深度联动官方健康体系与国内一线顶级医疗资源，独家搭建业内标杆级权威专业底座。全平台智能体服务、健康科普、干预方案均严格基于循证医学体系与主任级名医临床实践经验，全方位保障内容专业性、合规性与临床指导性，筑牢行业竞争护城河，拉开与同类产品的核心差距。</p>
+                
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3 style="color: #00C853;">✅ 官方权威资质：浙江省健康科普专家库分库</h3>
+                    <p class="text" style="margin-bottom: 0;">依托官方健康科普体系独家授权，成为拥有官方专家库资质的生活方式医学专业平台，所有内容输出全程贴合国家健康科普规范，合规性拉满，自带官方公信力背书，品牌可信度与行业地位远超同类竞品。</p>
+                </div>
+                <div class="card" style="margin-bottom: 15px;">
+                    <h3 style="color: #00C853;">✅ 顶级名医壁垒：2351位主任级名医知识底座，未来打通2351个医生智能体</h3>
+                    <p class="text" style="margin-bottom: 0;">已完成与浙江省2351名主任级名医的科普知识、临床经验授权合作，全面打通顶级医疗资源与AI智能技术，将名医的生活方式干预理念、慢病调理方案、日常健康养护经验数字化、智能化，让普通百姓无需排队、不限地域、低成本获取名医级健康指导，真正实现优质医疗资源全民普惠。</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #00C853;">✅ 全场景专业覆盖：24个科普专业分库，打造24个专项智能体矩阵</h3>
+                    <p class="text" style="margin-bottom: 0;">围绕生活方式医学全场景大众需求，依托循证医学知识与名医独家资源，搭建24个垂直领域专业分库，覆盖慢病管理、抗衰延寿、体重管控、睡眠改善、孕产养护、肠道健康、免疫提升等全品类健康场景，对应落地24个垂直专项智能体，相较于行业基础10大场景，实现健康需求全覆盖、人群痛点全响应，服务颗粒度更精细、用户适配性更强。</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">顶层开发逻辑 · 功能架构</h2>
+                <p class="text">平台以生活方式医学智能体为核心中枢，向下延伸构建标准化功能版块，同时辐射N个垂直细分专项智能体，全矩阵共享统一底层共用基座，实现“底层同源、前端分场、全域获客、统一留存变现”的闭环开发逻辑。</p>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">一、功能逻辑：核心功能架构</h3>
+                <p class="text">作为全域流量承接、用户沉淀、精准导流的核心枢纽，承载六大核心功能版块，打通服务与商业全链路：</p>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>功能版块1：自然对话交互（用户核心入口层）：支持大众自然语言多模态互动，零门槛获取健康信息，摒弃专业壁垒，适配全民使用习惯；</li>
+                    <li>功能版块2：健康画像识别（数据核心支撑层）：自动录入、归类用户健康数据，构建专属动态健康画像，精准识别用户需求与健康痛点；</li>
+                    <li>功能版块3：动态跟踪管理（服务核心交付层）：基于健康画像实时跟踪、智能匹配方案，全程陪伴式管理，主动推送提醒与干预建议；</li>
+                    <li>功能版块4：定制健康套餐（标准化服务层）：针对不同人群需求，输出个性化、可落地的生活方式健康套餐，兼顾专业性与实用性；</li>
+                    <li>功能版块5：严选健康好物（商业变现核心层）：依托合规供应链，推送适配的健康产品与服务，打造合规变现通道；</li>
+                    <li>功能版块6：名医专家科普（专业价值赋能层）：链接2351名主任级名医，提供权威科普内容与专业指导，强化平台专业价值</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">全智能体共享：AI底层共用基座</h2>
+                <p class="text">统一权威技术底座，保障全矩阵智能体专业合规、高效运行，六大核心支撑：</p>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>权威循证知识库</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">循证医学+名医知识双支撑，内容专业可追溯</p>
+                    </div>
+                    <div class="card">
+                        <h3>自研AI智能引擎</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">自有人工智能技术驱动，实现自然交互、智能匹配、动态推理</p>
+                    </div>
+                    <div class="card">
+                        <h3>动态健康画像系统</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">向量数据库支撑，数据互通，无需重复建档</p>
+                    </div>
+                    <div class="card">
+                        <h3>通用能力池</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">对话、打卡、提醒、数据导入等通用能力全矩阵共享</p>
+                    </div>
+                    <div class="card">
+                        <h3>供应链+支付闭环</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">自有+医院合作供应链+商业保险支付，打通商业闭环</p>
+                    </div>
+                    <div class="card">
+                        <h3>全链路安全合规</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">数据脱敏、加密传输，符合健康数据监管要求</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心价值</h2>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li>✅ 核心价值：全科健康初筛、基础生活调理、慢病预防、健康知识普及，聚焦非严肃、非问诊类大众健康管理</li>
+                    <li>✅ 目标用户：全年龄段健康关注者、亚健康人群、慢病高危人群、全民大众百姓</li>
+                    <li>✅ 核心功能：自然语言健康咨询、一键生成健康画像、基础健康方案、科普打卡、好物推荐、名医链接</li>
+                    <li>✅ 战略作用：承接全域流量，沉淀核心用户，精准导流至专项智能体，实现流量精细化运营</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">1+N生活方式医学AI智能体矩阵</h2>
+                <p class="text">N个垂直细分专项智能体矩阵<br>聚焦大众细分健康痛点，打造24大垂直场景专项智能体，核心场景精准落地，覆盖全人群全周期健康需求</p>
+                <div class="grid-2">
+                    <div class="level-item">
+                        <h3>🏠 长寿屋智能体「抗衰/延寿管理」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对中高龄、抗衰需求人群，提供寿命评估、衰老指标管理、慢病共管、定制抗衰方案</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>💪 男性活力智能体「机能/精力管理」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对成年男性，提供精力养护、机能调理、生活方式干预、日常提醒服务</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>❤️ 体重管理智能体「减脂/塑形管控」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对减脂塑形人群，提供热量平衡管理、食谱运动计划、体重动态跟踪</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🌙 安睡阁智能体「睡眠质量改善」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对失眠作息紊乱人群，提供睡眠节律调整、助眠方案、睡眠跟踪</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🧘 减压馆智能体「情绪/压力管理」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对高压职场人群，提供情绪调节、压力疏导、放松任务打卡</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🩺 慢病管理智能体「三高/代谢病养护」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对慢病人群，提供指标跟踪、生活干预、禁忌预警、复诊提醒</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🤰 孕养轩智能体「备孕/孕中/产后养护」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对孕产女性，提供全周期方案、产检提醒、产后修复指导</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🛡️ 免疫提升智能体「亚健康/疲劳改善」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对亚健康易疲劳人群，提供免疫提升计划、疲劳监测、感染预防</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>🫘 肠道健康智能体「消化/菌群调理」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对肠胃不适人群，提供菌群调理、饮食方案、排便跟踪</p>
+                    </div>
+                    <div class="level-item">
+                        <h3>✨ 美颜内调智能体「肌肤/好气色管理」</h3>
+                        <p class="text" style="font-size: 14px; margin-bottom: 0;">针对爱美人群，提供内调外养双方案、肌肤状态管理、养颜指导</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">统一运营 · 完整商业闭环</h2>
+                <p class="text">构建流量-留存-变现-迭代的可持续增长闭环，商业模型清晰，盈利空间可观</p>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>1 流量入口：双轨获客，全域覆盖：母体智能体全域导流+专项智能体独立获客，精准触达细分人群，降低获客成本</li>
+                    <li>2 用户留存：数据绑定，长期粘性：统一健康画像+多智能体数据同步+打卡积分体系，提升用户复购与长期留存</li>
+                    <li>3 多元变现：四大链路，盈利清晰：健康好物佣金、会员订阅、个性化定制服务、专家服务分成，叠加保险支付支持</li>
+                    <li>4 数据反哺：正向循环，持续优化：脱敏用户数据沉淀底层，持续迭代AI模型与知识库，提升服务精度</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">技术架构 & 安全保障 · 硬核技术底座</h2>
+                <p class="text"><strong>全栈分层技术架构</strong></p>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li>接入层：适配小程序/公众号/APP/官网多端，全场景覆盖，多端同步</li>
+                    <li>应用层：C端用户门户+专项智能体服务+运营后台，模块化可快速扩展</li>
+                    <li>智能层：知识推理+动态知识图谱+自研大模型调度+个性化适配</li>
+                    <li>数据层：脱敏健康档案+通用/专项知识库，分层隔离存储，安全可控</li>
+                    <li>基础设施：云原生弹性扩容，异地多活架构，保障高并发稳定运行</li>
+                </ul>
+
+                <p class="text" style="margin-top:30px;"><strong>银行级数据安全与合规保障</strong></p>
+                <div class="grid-4">
+                    <div class="data-showcase">
+                        <div class="data-num">99.99%</div>
+                        <div class="data-label">服务可用性</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num"><50ms</div>
+                        <div class="data-label">平均响应延迟</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num">三级等保</div>
+                        <div class="data-label">合规认证</div>
+                    </div>
+                    <div class="data-showcase">
+                        <div class="data-num">全链路脱敏</div>
+                        <div class="data-label">隐私保护</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: 医生端定制 -->
+        <div id="tab-b-end" class="tab-content">
+            <div class="hero">
+                <h1>Doctor Voice Agent</h1>
+                <p>医声智能体 · 释放医生潜能，专注核心医疗</p>
+            </div>
+
+            <!-- Interactive Demo 5 -->
+            <div class="demo-section" style="margin-top: 0; margin-bottom: 30px; padding: 20px;">
+                <div class="demo-badge">互动演示</div>
+                <h3 class="demo-title">⚕️ 医生工作台</h3>
+                <div style="width: 100%; height: 720px; border: 1px solid #eee; border-radius: 12px; overflow: hidden; background: white;">
+                    <div id="doctor-app-root" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">核心能力体系</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3 style="font-size: 20px;">AI Agent引擎</h3>
+                        <p class="text" style="font-size: 14px;">100+专业AI Agent智能编排，覆盖L1-L5五级体系。</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size: 20px;">智能数据辅助</h3>
+                        <p class="text" style="font-size: 14px;">基于医学知识库的智能数据建议，提升催工效率。</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size: 20px;">医疗级风控</h3>
+                        <p class="text" style="font-size: 14px;">双重安全审核机制，确保医疗内容合规安全。</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size: 20px;">多租户层级</h3>
+                        <p class="text" style="font-size: 14px;">支持超级管理员、机构管理员、医生、患者多级角色。</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size: 20px;">全周期管理</h3>
+                        <p class="text" style="font-size: 14px;">从预防到康复的全生命周期健康管理。</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size: 20px;">患者记忆系统</h3>
+                        <p class="text" style="font-size: 14px;">向患者数据库存储患者历史，提供个性化服务。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <script>
+        // Tab 切换逻辑
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                
+                this.classList.add('active');
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                document.querySelector('.main-content').scrollTop = 0;
+            });
+        });
+
+        // 延迟函数
+        const delay = ms => new Promise(r => setTimeout(r, ms));
+
+        // Tab 1: 路由演示逻辑
+        async function runRoutingDemo() {
+            const btn = document.getElementById('routing-btn');
+            const log = document.getElementById('routing-log');
+            btn.disabled = true;
+            log.style.display = 'flex';
+            log.innerHTML = `<div class="msg ai"><div class="typing"><span></span><span></span><span></span></div></div>`;
+            
+            await delay(1000);
+            log.innerHTML = `<div class="msg ai" style="border-left: 3px solid var(--primary);">🔍 <strong>通用基座解析意图：</strong><br>识别到关键标签 [失眠] [头晕] [作息紊乱]</div>`;
+            
+            await delay(800);
+            log.innerHTML += `<div class="msg ai"><div class="typing"><span></span><span></span><span></span></div></div>`;
+            
+            await delay(1200);
+            log.lastChild.remove();
+            log.innerHTML += `<div class="msg ai" style="background: var(--primary-light); border-color: var(--primary);">
+                ✅ <strong>动态路由成功：</strong>已转接至<strong>【安睡阁智能体】</strong><br>
+                <span style="font-size:13px; color:var(--text-secondary); display:block; margin-top:5px;">正在为您调取《睡眠节律调整干预模型》及相关减压方案...</span>
+            </div>`;
+            
+            btn.innerHTML = '重新发起';
+            btn.disabled = false;
+        }
+
+        // Tab 2: OS 底座链路演示逻辑
+        async function runOsDemo() {
+            const btn = document.getElementById('os-demo-btn');
+            btn.disabled = true;
+            const log = document.getElementById('wf-log');
+            
+            for(let i=1; i<=5; i++) {
+                document.getElementById(`wf-s${i}`).classList.remove('active');
+            }
+            log.innerHTML = "[System] 接收到一份门诊脱敏病历，初始化 L1-L5 处理管线...\n";
+            
+            const msgs = [
+                { id: 1, txt: "> [L1 基础感知层] 启动 OCR... 提取完成：患者血压 155/98 mmHg，体重超标 (BMI 28)。" },
+                { id: 2, txt: "> [L2 知识检索层] 触发 RAG 检索... 命中《2025版高血压基层诊疗指南》与《代谢综合征管理共识》。" },
+                { id: 3, txt: "> [L3 逻辑推理层] 推理引擎分析中... 判定：1级高血压伴肥胖风险。建议优先采用强化生活方式干预。" },
+                { id: 4, txt: "> [L4 决策执行层] 生成执行方案... 自动创建：1. DASH低钠饮食处方；2. 每周4次中强度有氧打卡任务。" },
+                { id: 5, txt: "> [L5 元认知监控层] 伦理与合规审查... 结果：干预方案安全，无药物冲突风险，允许下发给患者端。" }
+            ];
+            
+            for(let step of msgs) {
+                await delay(1200);
+                document.getElementById(`wf-s${step.id}`).classList.add('active');
+                log.innerHTML += step.txt + "\n";
+                log.scrollTop = log.scrollHeight;
+            }
+            
+            await delay(500);
+            log.innerHTML += "\n[System] ✅ 处理管线执行完毕，结果已分发至医患双端。";
+            btn.disabled = false;
+            btn.innerHTML = '▶️ 重新模拟';
+        }
+
+        // Tab 3: RAG 知识检索演示逻辑
+        async function runSearchDemo() {
+            const btn = document.getElementById('search-btn');
+            const resultBox = document.getElementById('knowledge-result');
+            const content = document.getElementById('knowledge-content');
+            
+            btn.disabled = true;
+            resultBox.classList.remove('show');
+            
+            // 强制重绘
+            void resultBox.offsetWidth; 
+            
+            content.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+            resultBox.classList.add('show');
+            
+            await delay(1500);
+            
+            content.innerHTML = `
+                <div style="margin-bottom: 12px;">
+                    <span class="source-tag">UpToDate 循证数据库</span>
+                    <span class="source-tag">2025版糖尿病用药指南</span>
+                    <span class="source-tag">知识图谱关联度: 98%</span>
+                </div>
+                <p style="font-size: 16px; color: var(--text-main); margin-bottom: 10px;"><strong>【二甲双胍】的主要禁忌症结构化提取如下：</strong></p>
+                <ul style="padding-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                    <li><strong>严重肾功能不全：</strong>eGFR < 30 mL/min/1.73m² 绝对禁用。</li>
+                    <li><strong>组织缺氧相关疾病：</strong>如失代偿期心力衰竭、呼吸衰竭、近期急性心肌梗死。</li>
+                    <li><strong>急性代谢性疾病：</strong>如糖尿病酮症酸中毒（DKA）。</li>
+                    <li><strong>造影剂冲突：</strong>静脉注射碘造影剂前或当时应停用。</li>
+                </ul>
+                <div style="margin-top: 15px; padding: 12px; background: #fff5f5; border-left: 4px solid #F53F3F; border-radius: 4px; font-size: 14px; color: #4E5969;">
+                    <strong style="color: #F53F3F;">⚠️ AI 合规提示：</strong>以上信息仅供专业医疗人员决策参考，不可直接替代临床面诊。
+                </div>
+            `;
+            btn.disabled = false;
+        }
+
+        // Tab 4: C端对话演示逻辑 (流式加载版)
+        async function runCEndDemo(userText, type) {
+            const optionsBox = document.getElementById('c-chat-options');
+            optionsBox.style.display = 'none';
+            const body = document.getElementById('c-chat-body');
+            
+            // 用户发送消息
+            body.innerHTML += `<div class="msg user">${userText}</div>`;
+            body.scrollTop = body.scrollHeight;
+            
+            // AI思考中...
+            await delay(500);
+            const aiBox = document.createElement('div');
+            aiBox.className = 'msg ai';
+            aiBox.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+            body.appendChild(aiBox);
+            body.scrollTop = body.scrollHeight;
+            
+            // 准备回答内容
+            let textHtml = '';
+            let cardsHtml = '';
+            let aiFooterHtml = `
+                <div class="ai-footer">
+                    <span>内容由AI生成，仅供参考</span>
+                    <div class="ai-actions">
+                        <span>🔊</span>
+                        <span>📋</span>
+                        <span>👍</span>
+                        <span>👎</span>
+                    </div>
+                </div>`;
+                
+            if(type === 'uric_acid') {
+                textHtml = `
+                    检测到您触发了<strong>【慢病坊智能体】</strong>。<br><br>
+                    🔍 <strong>健康画像调取：</strong><br>
+                    您（男性，35岁），最近一次体检尿酸值为 480 μmol/L。属于轻度偏高（无症状高尿酸血症）。<br><br>
+                    <strong>💡 AI 管理建议：</strong><br>
+                    目前暂不建议立刻服药。建议优先进行生活方式干预：<br>
+                    💧 每日饮水 2000ml 以上<br>
+                    🚫 严格限制海鲜、内脏及酒精<br><br>
+                `;
+                cardsHtml = `
+                    <div class="push-card">
+                        <div class="push-card-title">📚 权威科普推送</div>
+                        <div class="push-card-content">《高尿酸血症饮食干预指南(2025版)》—— 浙江省科普专家库</div>
+                        <button class="push-card-btn">点击阅读全文</button>
+                    </div>
+                    
+                    <div class="push-card">
+                        <div class="push-card-title">📅 跟踪管理计划</div>
+                        <div class="push-card-content">生成“21天降酸饮食与运动打卡计划”，每日自动提醒。</div>
+                        <button class="push-card-btn" style="background: var(--primary); color: white;">一键开启打卡</button>
+                    </div>
+                `;
+            } else if (type === 'sleep') {
+                textHtml = `
+                    检测到您触发了<strong>【安睡阁智能体】</strong>和<strong>【免疫堂智能体】</strong>。<br><br>
+                    🔍 <strong>AI 分析：</strong><br>
+                    您的症状可能与近期高压工作和睡眠节律紊乱有关，长期的睡眠不足会导致免疫力下降和疲劳感。<br><br>
+                    <strong>💡 综合管理建议：</strong><br>
+                    1. 睡前1小时避免使用电子产品<br>
+                    2. 尝试睡前进行15分钟正念冥想<br>
+                    3. 补充适量维生素B族和镁元素<br><br>
+                `;
+                cardsHtml = `
+                    <div class="push-card">
+                        <div class="push-card-title">🎧 助眠音频推送</div>
+                        <div class="push-card-content">【深度放松】名医指导：15分钟睡前正念冥想引导音频</div>
+                        <button class="push-card-btn">立即播放</button>
+                    </div>
+                    
+                    <div class="push-card">
+                        <div class="push-card-title">🛍️ 健康套餐推荐</div>
+                        <div class="push-card-content">严选“安神助眠+免疫提升”营养包（褪黑素+复合维B）。</div>
+                        <button class="push-card-btn" style="background: #00C853; color: white;">查看合规商品</button>
+                    </div>
+                `;
+            }
+            
+            await delay(500);
+            
+            // 简单实现 HTML 的流式输出打字机效果 (只对文本部分进行流式)
+            aiBox.innerHTML = '<div class="msg-content"></div>';
+            const contentBox = aiBox.querySelector('.msg-content');
+            
+            let isTag = false;
+            let currentTag = '';
+            let outputHtml = '';
+            
+            for (let i = 0; i < textHtml.length; i++) {
+                let char = textHtml[i];
+                if (char === '<') {
+                    isTag = true;
+                    currentTag += char;
+                } else if (char === '>') {
+                    isTag = false;
+                    currentTag += char;
+                    outputHtml += currentTag;
+                    contentBox.innerHTML = outputHtml;
+                    currentTag = '';
+                } else {
+                    if (isTag) {
+                        currentTag += char;
+                    } else {
+                        outputHtml += char;
+                        contentBox.innerHTML = outputHtml + '<span style="display:inline-block;width:4px;height:14px;background:var(--primary);vertical-align:middle;margin-left:2px;animation:blink 1s infinite;"></span>';
+                        // 滚动到底部
+                        if(i % 5 === 0) body.scrollTop = body.scrollHeight; 
+                        // 随机延迟 2-8ms 模拟真实且快速的打字
+                        await delay(Math.floor(Math.random() * 6) + 2);
+                    }
+                }
+            }
+            
+            // 文本流式结束后，一次性显示卡片和底部工具栏
+            contentBox.innerHTML = outputHtml + cardsHtml;
+            aiBox.innerHTML += aiFooterHtml;
+            body.scrollTop = body.scrollHeight;
+            
+            // 恢复选项按钮以允许继续测试
+            setTimeout(() => {
+                optionsBox.style.display = 'flex';
+                optionsBox.innerHTML = `<button class="chat-option-btn" onclick="document.getElementById('c-chat-body').innerHTML='<div class=\\'msg ai\\'>为您重置了对话，请问今天需要什么帮助？</div>'; document.getElementById('c-chat-options').innerHTML='<button class=\\'chat-option-btn\\' onclick=\\'runCEndDemo(\\&quot;体检指标异常，尿酸偏高怎么办？\\&quot;, \\&quot;uric_acid\\&quot;)\\'>咨询指标异常</button><button class=\\'chat-option-btn\\' onclick=\\'runCEndDemo(\\&quot;最近总觉得很累，睡眠也不好\\&quot;, \\&quot;sleep\\&quot;)\\'>咨询睡眠与疲劳</button>';">🔄 重新演示</button>`;
+            }, 800);
+        }
+
+        // Tab 5: 医生端病历生成演示逻辑
+        async function runBEndDemo() {
+            const btn = document.getElementById('b-demo-btn');
+            btn.disabled = true;
+            btn.innerHTML = '🔄 AI 多模态解析中...';
+            
+            // 重置
+            document.getElementById('emr-zhusu').innerText = '...';
+            document.getElementById('emr-xianbingshi').innerText = '...';
+            document.getElementById('emr-jiwangshi').innerText = '...';
+            document.getElementById('emr-suggest').innerText = '...';
+            document.getElementById('emr-conf').style.width = '0%';
+            document.getElementById('emr-conf-text').innerText = '0%';
+            
+            await delay(1500);
+            
+            document.getElementById('emr-zhusu').innerText = '反复胸闷1周，伴心悸。';
+            await delay(400);
+            document.getElementById('emr-xianbingshi').innerText = '患者近1周内无明显诱因出现反复胸闷，伴有心悸不适，未见明显放射痛，休息后可稍缓解。';
+            await delay(400);
+            document.getElementById('emr-jiwangshi').innerText = '高血压病史 3 年。';
+            await delay(600);
+            document.getElementById('emr-suggest').innerHTML = '1. 建议完善心电图、心肌酶谱检查<br>2. 冠心病待排，建议心内科专科复诊';
+            
+            // 进度条动画
+            document.getElementById('emr-conf').style.width = '92%';
+            document.getElementById('emr-conf-text').innerText = '92%';
+            
+            btn.disabled = false;
+            btn.innerHTML = '✨ 重新生成';
+        }
+    </script>
+</body>
 </html>
