@@ -5,8 +5,8 @@
   "scripts": {
     "start": "concurrently \"npm run start:portal\" \"npm run start:demo\" \"npm run start:wutong\"",
     "start:portal": "npx serve -p 8080 .",
-    "start:demo": "cd demo && npm run dev -- --port 5173",
-    "start:wutong": "cd zheli-wutong && npm run dev -- --port 5174",
+    "start:demo": "cd demo && npm run dev -- --port 5173 --host",
+    "start:wutong": "cd zheli-wutong && npm run dev -- --port 5174 --host",
     "install:all": "cd demo && npm install && cd ../zheli-wutong && npm install"
   },
   "devDependencies": {
