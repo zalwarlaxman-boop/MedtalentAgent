@@ -1,0 +1,16 @@
+{
+  "name": "medtalent-agent-portal",
+  "version": "1.0.0",
+  "description": "木吾木同医疗智能体演示平台整合入口",
+  "scripts": {
+    "start": "concurrently \"npm run start:portal\" \"npm run start:demo\" \"npm run start:wutong\"",
+    "start:portal": "npx serve -p 8080 .",
+    "start:demo": "cd demo && npm run dev -- --port 5173",
+    "start:wutong": "cd zheli-wutong && npm run dev -- --port 5174",
+    "install:all": "cd demo && npm install && cd ../zheli-wutong && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "serve": "^14.2.1"
+  }
+}
