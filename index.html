@@ -1444,7 +1444,6 @@
                 
                 // 2. 隐藏所有 Tab 内容
                 document.querySelectorAll('.tab-content').forEach(tab => {
-                    tab.style.display = 'none';
                     tab.classList.remove('active');
                 });
                 
@@ -1456,7 +1455,6 @@
                 const targetTab = document.getElementById(targetId);
                 
                 if(targetTab) {
-                    targetTab.style.display = 'block';
                     // 触发 reflow 确保动画重新执行
                     void targetTab.offsetWidth;
                     targetTab.classList.add('active');
