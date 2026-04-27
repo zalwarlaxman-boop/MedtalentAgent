@@ -24,13 +24,13 @@ export function DoctorTab() {
             System Entry
           </div>
           <h3 className="font-title text-[40px] font-bold text-text-main mb-4 flex items-center justify-center gap-3 tracking-[-0.5px]">
-            👨‍⚕️ 医生端定制服务
+            医生端定制服务
           </h3>
           <p className="text-[18px] text-text-secondary mb-10 max-w-[600px] mx-auto">
             进入真实的医生端应用，体验语音口述生成病历、智能预问诊与自动辅助诊断。
           </p>
           <a href="/demo/" className="inline-block">
-            <Button variant="doctor">⚕️ 进入医生端系统</Button>
+            <Button variant="doctor">进入医生端系统</Button>
           </a>
         </div>
 

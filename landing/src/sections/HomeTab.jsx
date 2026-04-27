@@ -44,7 +44,7 @@ export function HomeTab({ onNavigate }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           <Card className="p-10">
             <h3 className="text-[22px] text-text-main mb-4 flex items-center gap-3 font-semibold">
-              <span className="text-[28px]">🌊</span> 前沿科技浪尖
+              前沿科技浪尖
             </h3>
             <p className="text-[17px] text-text-secondary leading-relaxed">
               在人工智能浪潮汹涌袭来的时刻，我们通过技术创新助力医学科普产业化高质量推进。
@@ -52,7 +52,7 @@ export function HomeTab({ onNavigate }) {
           </Card>
           <Card className="p-10">
             <h3 className="text-[22px] text-text-main mb-4 flex items-center gap-3 font-semibold">
-              <span className="text-[28px]">🤝</span> 医患高效链接
+              医患高效链接
             </h3>
             <p className="text-[17px] text-text-secondary leading-relaxed">
               助力医生搭建智能体体系，高效链接广大群众，让百姓轻松获得全周期健康管理服务。

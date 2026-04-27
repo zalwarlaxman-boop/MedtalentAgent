@@ -28,7 +28,7 @@ export function KnowledgeTab() {
       <div className="max-w-[1200px] mx-auto px-10 py-10">
         <div className="bg-bg-secondary rounded-[24px] p-10 md:p-20 text-center my-16 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-primary/10 text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold">Knowledge Search</div>
-          <h3 className="font-title text-[32px] font-bold text-text-main mb-4 mt-6 flex items-center justify-center gap-3 tracking-[-0.5px]">📚 RAG 循证医学知识检索</h3>
+          <h3 className="font-title text-[32px] font-bold text-text-main mb-4 mt-6 flex items-center justify-center gap-3 tracking-[-0.5px]">RAG 循证医学知识检索</h3>
           <p className="text-[18px] text-text-secondary mb-12 max-w-[600px] mx-auto">模拟在海量知识库中进行大模型语义检索，提供可溯源的权威医学结论。</p>
 
           <div className="max-w-[800px] mx-auto bg-white border border-black/5 rounded-[24px] shadow-float overflow-hidden flex flex-col md:flex-row items-center mb-10 transition-all duration-300 focus-within:shadow-float-hover focus-within:border-primary/30">
@@ -62,7 +62,7 @@ export function KnowledgeTab() {
                 <li><strong>造影剂冲突：</strong>静脉注射碘造影剂前或当时应停用。</li>
               </ul>
               <div className="p-4 bg-[#fff5f5] border-l-4 border-[#F53F3F] rounded-r-lg text-[14px] text-text-secondary">
-                <strong className="text-[#F53F3F]">⚠️ AI 合规提示：</strong>以上信息仅供专业医疗人员决策参考，不可直接替代临床面诊。
+                <strong className="text-[#F53F3F]">AI 合规提示：</strong>以上信息仅供专业医疗人员决策参考，不可直接替代临床面诊。
               </div>
             </div>
           )}

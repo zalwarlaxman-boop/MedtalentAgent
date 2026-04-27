@@ -27,7 +27,7 @@ export function OsTab() {
     }
 
     await new Promise(r => setTimeout(r, 500));
-    setLogs(prev => [...prev, "", "[System] ✅ 处理管线执行完毕，结果已分发至医患双端。"]);
+    setLogs(prev => [...prev, "", "[System] 处理管线执行完毕，结果已分发至医患双端。"]);
     setIsRunning(false);
   };
 
@@ -46,10 +46,10 @@ export function OsTab() {
       <div className="max-w-[1200px] mx-auto px-10 py-10">
         <div className="bg-bg-secondary rounded-[24px] p-10 my-16 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-primary/10 text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold">Workflow Demo</div>
-          <h3 className="font-title text-[28px] font-bold text-text-main mb-6 mt-10 flex items-center gap-3">⚙️ L1-L5 全链路处理引擎</h3>
+          <h3 className="font-title text-[28px] font-bold text-text-main mb-6 mt-10 flex items-center gap-3">L1-L5 全链路处理引擎</h3>
           <p className="text-[16px] text-text-secondary mb-10">模拟多 Agent 协作系统处理一份真实体检报告的全过程。</p>
           <Button onClick={runOsDemo} disabled={isRunning} className="mb-14">
-            {isRunning ? '处理中...' : (logs.length > 1 ? '▶️ 重新模拟' : '▶️ 模拟处理体检报告')}
+            {isRunning ? '处理中...' : (logs.length > 1 ? '重新模拟' : '模拟处理体检报告')}
           </Button>
 
           <div className="relative flex justify-between items-center px-8 mt-10">

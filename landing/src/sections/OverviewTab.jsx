@@ -14,7 +14,7 @@ export function OverviewTab() {
 
     await new Promise(r => setTimeout(r, 1000));
     setChatLog([
-      { type: 'ai', content: <div>🔍 <strong>通用基座解析意图：</strong><br/>识别到关键标签 [失眠] [头晕] [作息紊乱]</div>, border: true }
+      { type: 'ai', content: <div><strong>通用基座解析意图：</strong><br/>识别到关键标签 [失眠] [头晕] [作息紊乱]</div>, border: true }
     ]);
 
     await new Promise(r => setTimeout(r, 800));
@@ -28,7 +28,7 @@ export function OverviewTab() {
         type: 'ai',
         bg: 'bg-primary-light',
         content: <div>
-          ✅ <strong>动态路由成功：</strong>已转接至<strong>【安睡阁智能体】</strong><br/>
+          <strong>动态路由成功：</strong>已转接至<strong>【安睡阁智能体】</strong><br/>
           <span className="text-[13px] text-text-secondary block mt-1.5">正在为您调取《睡眠节律调整干预模型》及相关减压方案...</span>
         </div>
       }];
@@ -53,7 +53,7 @@ export function OverviewTab() {
         {/* Demo */}
         <div className="bg-bg-secondary rounded-[24px] p-10 my-16 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-primary/10 text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold">Interactive Demo</div>
-          <h3 className="font-title text-[28px] font-bold text-text-main mb-6 mt-10 flex items-center gap-3">🎯 1+N 智能路由中枢</h3>
+          <h3 className="font-title text-[28px] font-bold text-text-main mb-6 mt-10 flex items-center gap-3">1+N 智能路由中枢</h3>
           <p className="text-[16px] text-text-secondary mb-10">模拟通用基座接收用户自然语言，精准路由至对应垂直智能体的过程。</p>
 
           <div className="bg-white rounded-[24px] border-none shadow-md overflow-hidden flex flex-col h-auto">
@@ -65,7 +65,7 @@ export function OverviewTab() {
                 className="flex-1 bg-bg-secondary border-none text-[16px] px-6 py-3.5 rounded-[20px] outline-none"
               />
               <Button onClick={runRoutingDemo} disabled={isRunning}>
-                {isRunning ? '处理中...' : (chatLog.length > 0 ? '重新发起' : '发起咨询 🚀')}
+                {isRunning ? '处理中...' : (chatLog.length > 0 ? '重新发起' : '发起咨询')}
               </Button>
             </div>
 

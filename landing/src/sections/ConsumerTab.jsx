@@ -24,13 +24,13 @@ export function ConsumerTab() {
             System Entry
           </div>
           <h3 className="font-title text-[40px] font-bold text-text-main mb-4 flex items-center justify-center gap-3 tracking-[-0.5px]">
-            🎯 大众端健康平台
+            大众端健康平台
           </h3>
           <p className="text-[18px] text-text-secondary mb-10 max-w-[600px] mx-auto">
             进入真实的浙里健康前端应用，体验基于多模态大模型的生活方式医学智能体平台。
           </p>
           <a href="/wutong/" className="inline-block">
-            <Button>🚀 进入大众端平台系统</Button>
+            <Button>进入大众端平台系统</Button>
           </a>
         </div>
 
@@ -58,15 +58,15 @@ export function ConsumerTab() {
 
           <div className="space-y-6 max-w-[1000px] mx-auto">
             <Card className="p-8">
-              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">✅ 官方权威资质：浙江省健康科普专家库分库</h3>
+              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">官方权威资质：浙江省健康科普专家库分库</h3>
               <p className="text-[16px] text-text-secondary leading-relaxed">依托官方健康科普体系独家授权，成为拥有官方专家库资质的生活方式医学专业平台，所有内容输出全程贴合国家健康科普规范，合规性拉满，自带官方公信力背书，品牌可信度与行业地位远超同类竞品。</p>
             </Card>
             <Card className="p-8">
-              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">✅ 顶级名医壁垒：2351位主任级名医知识底座，未来打通2351个医生智能体</h3>
+              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">顶级名医壁垒：2351位主任级名医知识底座，未来打通2351个医生智能体</h3>
               <p className="text-[16px] text-text-secondary leading-relaxed">已完成与浙江省2351名主任级名医的科普知识、临床经验授权合作，全面打通顶级医疗资源与AI智能技术，将名医的生活方式干预理念、慢病调理方案、日常健康养护经验数字化、智能化，让普通百姓无需排队、不限地域、低成本获取名医级健康指导，真正实现优质医疗资源全民普惠。</p>
             </Card>
             <Card className="p-8">
-              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">✅ 全场景专业覆盖：24个科普专业分库，打造24个专项智能体矩阵</h3>
+              <h3 className="text-[#00C853] text-[20px] font-semibold mb-3 flex items-center gap-2">全场景专业覆盖：24个科普专业分库，打造24个专项智能体矩阵</h3>
               <p className="text-[16px] text-text-secondary leading-relaxed">围绕生活方式医学全场景大众需求，依托循证医学知识与名医独家资源，搭建24个垂直领域专业分库，覆盖慢病管理、抗衰延寿、体重管控、睡眠改善、孕产养护、肠道健康、免疫提升等全品类健康场景，对应落地24个垂直专项智能体，相较于行业基础10大场景，实现健康需求全覆盖、人群痛点全响应，服务颗粒度更精细、用户适配性更强。</p>
             </Card>
           </div>
@@ -124,10 +124,10 @@ export function ConsumerTab() {
           <h2 className="font-title text-[32px] font-bold text-center mb-8 tracking-[-0.5px] text-text-main">核心价值</h2>
           <div className="max-w-[900px] mx-auto">
             <ul className="text-[16px] text-text-secondary leading-[1.8] space-y-4">
-              <li className="flex gap-2"><span>✅</span> <span><strong>核心价值：</strong>全科健康初筛、基础生活调理、慢病预防、健康知识普及，聚焦非严肃、非问诊类大众健康管理</span></li>
-              <li className="flex gap-2"><span>✅</span> <span><strong>目标用户：</strong>全年龄段健康关注者、亚健康人群、慢病高危人群、全民大众百姓</span></li>
-              <li className="flex gap-2"><span>✅</span> <span><strong>核心功能：</strong>自然语言健康咨询、一键生成健康画像、基础健康方案、科普打卡、好物推荐、名医链接</span></li>
-              <li className="flex gap-2"><span>✅</span> <span><strong>战略作用：</strong>承接全域流量，沉淀核心用户，精准导流至专项智能体，实现流量精细化运营</span></li>
+              <li className="flex gap-2"><span>•</span> <span><strong>核心价值：</strong>全科健康初筛、基础生活调理、慢病预防、健康知识普及，聚焦非严肃、非问诊类大众健康管理</span></li>
+              <li className="flex gap-2"><span>•</span> <span><strong>目标用户：</strong>全年龄段健康关注者、亚健康人群、慢病高危人群、全民大众百姓</span></li>
+              <li className="flex gap-2"><span>•</span> <span><strong>核心功能：</strong>自然语言健康咨询、一键生成健康画像、基础健康方案、科普打卡、好物推荐、名医链接</span></li>
+              <li className="flex gap-2"><span>•</span> <span><strong>战略作用：</strong>承接全域流量，沉淀核心用户，精准导流至专项智能体，实现流量精细化运营</span></li>
             </ul>
           </div>
         </div>
@@ -140,43 +140,43 @@ export function ConsumerTab() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🏠 长寿屋智能体「抗衰/延寿管理」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">长寿屋智能体「抗衰/延寿管理」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对中高龄、抗衰需求人群，提供寿命评估、衰老指标管理、慢病共管、定制抗衰方案</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">💪 男性活力智能体「机能/精力管理」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">男性活力智能体「机能/精力管理」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对成年男性，提供精力养护、机能调理、生活方式干预、日常提醒服务</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">❤️ 体重管理智能体「减脂/塑形管控」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">体重管理智能体「减脂/塑形管控」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对减脂塑形人群，提供热量平衡管理、食谱运动计划、体重动态跟踪</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🌙 安睡阁智能体「睡眠质量改善」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">安睡阁智能体「睡眠质量改善」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对失眠作息紊乱人群，提供睡眠节律调整、助眠方案、睡眠跟踪</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🧘 减压馆智能体「情绪/压力管理」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">减压馆智能体「情绪/压力管理」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对高压职场人群，提供情绪调节、压力疏导、放松任务打卡</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🩺 慢病管理智能体「三高/代谢病养护」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">慢病管理智能体「三高/代谢病养护」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对慢病人群，提供指标跟踪、生活干预、禁忌预警、复诊提醒</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🤰 孕养轩智能体「备孕/孕中/产后养护」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">孕养轩智能体「备孕/孕中/产后养护」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对孕产女性，提供全周期方案、产检提醒、产后修复指导</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🛡️ 免疫提升智能体「亚健康/疲劳改善」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">免疫提升智能体「亚健康/疲劳改善」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对亚健康易疲劳人群，提供免疫提升计划、疲劳监测、感染预防</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">🫘 肠道健康智能体「消化/菌群调理」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">肠道健康智能体「消化/菌群调理」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对肠胃不适人群，提供菌群调理、饮食方案、排便跟踪</p>
             </Card>
             <Card className="p-8 border-l-[4px] border-primary">
-              <h3 className="text-[20px] font-semibold text-text-main mb-3">✨ 美颜内调智能体「肌肤/好气色管理」</h3>
+              <h3 className="text-[20px] font-semibold text-text-main mb-3">美颜内调智能体「肌肤/好气色管理」</h3>
               <p className="text-[15px] text-text-secondary leading-relaxed">针对爱美人群，提供内调外养双方案、肌肤状态管理、养颜指导</p>
             </Card>
           </div>
