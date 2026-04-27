@@ -1,0 +1,16 @@
+# Tasks
+- [ ] Task 1: Configure Vite base paths for both React projects.
+  - [ ] SubTask 1.1: Set `base: './'` in `/workspace/zheli-wutong/vite.config.js`.
+  - [ ] SubTask 1.2: Set `base: './'` in `/workspace/demo/vite.config.ts`.
+- [ ] Task 2: Build both React projects.
+  - [ ] SubTask 2.1: Run `npm install` and `npm run build` in `/workspace/zheli-wutong`.
+  - [ ] SubTask 2.2: Run `npm install` and `npm run build` in `/workspace/demo`.
+- [ ] Task 3: Replace Tab 4 mockup with `zheli-wutong` iframe.
+  - [ ] SubTask 3.1: In `/workspace/index.html`, locate `#tab-c-end` and remove the `.mobile-mockup` element.
+  - [ ] SubTask 3.2: Insert an `<iframe src="./zheli-wutong/dist/index.html">` with appropriate styles (e.g., width, height, border, border-radius) to match the original mockup container.
+- [ ] Task 4: Replace Tab 5 mockup with `demo` iframe.
+  - [ ] SubTask 4.1: In `/workspace/index.html`, locate `#tab-b-end` and remove the `.emr-demo` element.
+  - [ ] SubTask 4.2: Insert an `<iframe src="./demo/dist/index.html">` with appropriate styles to fit the content area.
+- [ ] Task 5: Clean up unused CSS and JS.
+  - [ ] SubTask 5.1: Remove JS functions `runCEndDemo` and `runBEndDemo` from `index.html`.
+  - [ ] SubTask 5.2: Remove related mockup CSS from `index.html` (e.g., `.mobile-mockup`, `.emr-demo`).

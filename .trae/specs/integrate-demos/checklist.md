@@ -1,0 +1,7 @@
+- [ ] `zheli-wutong/vite.config.js` has `base: './'` or equivalent.
+- [ ] `demo/vite.config.ts` has `base: './'` or equivalent.
+- [ ] Both projects compile successfully to their `dist` folders.
+- [ ] `index.html` Tab 4 embeds `zheli-wutong/dist/index.html` in an iframe.
+- [ ] `index.html` Tab 5 embeds `demo/dist/index.html` in an iframe.
+- [ ] The iframes have appropriate styling (width, height, border).
+- [ ] Obsolete JS and CSS related to the old mockups are removed.
