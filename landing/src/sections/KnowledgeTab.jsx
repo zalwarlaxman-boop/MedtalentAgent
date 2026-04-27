@@ -41,7 +41,7 @@ export function KnowledgeTab() {
             <button
               onClick={runSearchDemo}
               disabled={isSearching}
-              className="w-full md:w-auto h-[70px] bg-gradient-to-r from-primary to-primary-dark text-white px-10 text-[18px] font-semibold transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2"
+              className="w-full md:w-auto h-[70px] bg-gradient-to-r from-primary to-primary-dark text-white px-10 text-[18px] font-semibold transition-transform hover:scale-[1.02] active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2 whitespace-nowrap"
             >
               {isSearching ? '检索中...' : '智能检索'}
             </button>
