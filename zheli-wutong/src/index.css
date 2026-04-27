@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @import "tailwindcss";
 
@@ -12,16 +11,6 @@
   --color-wutong-accent: #52b788;
   --font-serif: "Noto Serif SC", serif;
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-lora: "Lora", Georgia, serif;
-  --font-poppins: "Poppins", Arial, sans-serif;
-  
-  --color-bg-main: #faf9f5;
-  --color-text-main: #141413;
-  --color-text-muted: #b0aea5;
-  --color-bg-muted: #e8e6dc;
-  --color-medical-blue: #6a9bcc;
-  --color-health-green: #788c5d;
-  --color-alert-orange: #d97757;
 }
 
 @layer base {
@@ -33,24 +22,10 @@
       radial-gradient(circle at 15% 50%, rgba(216, 243, 220, 0.4) 0%, transparent 50%),
       radial-gradient(circle at 85% 30%, rgba(82, 183, 136, 0.15) 0%, transparent 50%);
     background-attachment: fixed;
-    -webkit-tap-highlight-color: transparent;
   }
   
   h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
-  }
-  
-  .font-heading {
-    font-family: var(--font-poppins);
-  }
-}
-
-@layer utilities {
-  .pb-safe {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .tabular-nums {
-    font-variant-numeric: tabular-nums;
   }
 }
 
