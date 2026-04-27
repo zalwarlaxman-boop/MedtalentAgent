@@ -3,9 +3,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Bookmark, BookmarkCheck, Heart, ExternalLink, PlayCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getPopSciItem, type PopSciType } from "@/data/popsciCatalog";
-import { cn } from "@/components/Layout";
-import { usePopSciState } from "@/hooks/usePopSciState";
+
+import { getPopSciItem } from "@/doctor-demo/data/popsciCatalog";
+import { cn } from "@/doctor-demo/components/Layout";
+import { usePopSciState } from "@/doctor-demo/hooks/usePopSciState";
+import { type PopSciType } from "@/doctor-demo/data/popsciCatalog";
 
 const typeLabel: Record<PopSciType, string> = {
   article: "科普文章",

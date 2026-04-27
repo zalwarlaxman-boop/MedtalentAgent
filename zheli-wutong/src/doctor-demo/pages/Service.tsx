@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Users, HeartPulse, ShoppingBag, ActivitySquare, ArrowUpRight, Stethoscope } from "lucide-react";
-import { serviceCatalog } from "@/data/serviceCatalog";
+import { serviceCatalog } from "@/doctor-demo/data/serviceCatalog";
 
 export default function Service() {
   const navigate = useNavigate();

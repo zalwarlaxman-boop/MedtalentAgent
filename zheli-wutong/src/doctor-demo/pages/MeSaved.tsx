@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, BookmarkX, ChevronRight, Heart } from "lucide-react";
-import { getPopSciItem, type PopSciType } from "@/data/popsciCatalog";
-import { usePopSciState } from "@/hooks/usePopSciState";
-import { cn } from "@/components/Layout";
+import { type PopSciType, getPopSciItem } from "@/doctor-demo/data/popsciCatalog";
+import { usePopSciState } from "@/doctor-demo/hooks/usePopSciState";
+import { cn } from "@/doctor-demo/components/Layout";
 
 function parseKey(key: string): { type: PopSciType; id: string } | null {
   const [type, ...rest] = key.split(":");

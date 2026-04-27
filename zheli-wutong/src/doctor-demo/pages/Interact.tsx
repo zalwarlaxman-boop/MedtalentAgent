@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useNavigate } from "react-router-dom";
-import { cn } from "@/components/Layout";
+import { cn } from "@/doctor-demo/components/Layout";
 import { createWorker } from 'tesseract.js';
-import { getRecommendations, type ContentItem, type ContentType } from "@/data/contentCatalog";
+import { getRecommendations, type ContentItem, type ContentType } from "@/doctor-demo/data/contentCatalog";
 
 const QUICK_QUESTIONS = [
   "高血压能吃柚子吗？",

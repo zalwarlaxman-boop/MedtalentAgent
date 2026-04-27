@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { getServiceBySlug } from "@/data/serviceCatalog";
+import { getServiceBySlug } from "@/doctor-demo/data/serviceCatalog";
 
 export default function ServiceDetail() {
   const navigate = useNavigate();

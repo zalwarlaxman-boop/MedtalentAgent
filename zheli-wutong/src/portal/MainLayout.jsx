@@ -68,7 +68,7 @@ export default function MainLayout() {
               </div>
             </div>
 
-            <div className="demo-section" style={{ background: 'transparent', border: 'none', boxShadow: 'none', marginTop: 0, marginBottom: '30px', padding: 0 }}>
+            <div className="demo-section" style={{ background: 'transparent', border: 'none', boxShadow: 'none', marginTop: 0, marginBottom: '30px', padding: 0, position: 'relative', zIndex: 100 }}>
               <MacbookMockup>
                 <PatientApp />
               </MacbookMockup>

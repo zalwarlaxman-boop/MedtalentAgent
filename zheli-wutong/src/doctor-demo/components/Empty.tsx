@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/doctor-demo/lib/utils'
 
 // Empty component
 export default function Empty() {

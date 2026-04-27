@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, BellRing, Target, ArrowRight, UserCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { listNotices } from "@/data/noticeCatalog";
+import { listNotices } from "@/doctor-demo/data/noticeCatalog";
 
 export default function Manage() {
   const [checkedIn, setCheckedIn] = useState(false);

@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { getNoticeById } from "@/data/noticeCatalog";
+
+import { getNoticeById } from "@/doctor-demo/data/noticeCatalog";
 
 export default function NoticeDetail() {
   const navigate = useNavigate();
