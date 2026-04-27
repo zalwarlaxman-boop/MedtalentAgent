@@ -7,7 +7,7 @@
     "install:all": "npm install && cd demo && npm install && cd ../zheli-wutong && npm install",
     "dev:demo": "cd demo && npm run dev",
     "dev:wutong": "cd zheli-wutong && npm run dev",
-    "dev:root": "npx http-server . -p 8080",
+    "dev:root": "npx http-server . -p 8081",
     "dev:all": "concurrently \"npm run dev:root\" \"npm run dev:demo\" \"npm run dev:wutong\"",
     "build:demo": "cd demo && npm run build",
     "build:wutong": "cd zheli-wutong && npm run build",
