@@ -3,23 +3,23 @@ import { Card, Button } from "../components/UI";
 export function ConsumerTab() {
   return (
     <div className="w-full">
-      <div className="relative overflow-hidden text-center pt-24 pb-20 px-10 border-b border-black/5 mb-5 bg-gradient-to-b from-bg-secondary to-bg-color">
+      <div className="relative overflow-hidden text-center pt-20 pb-8 px-10 border-b border-black/5 mb-0 bg-gradient-to-b from-bg-secondary to-bg-color">
         <h2 className="text-[24px] font-semibold text-primary mb-4">Consumer Platform</h2>
         <h1 className="font-title text-[56px] font-bold leading-[1.1] tracking-[-1px] mb-6 bg-gradient-to-br from-[#1A1D20] to-[#4A5568] bg-clip-text text-transparent">
           浙里健康 - 大众端平台
         </h1>
-        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-8 leading-relaxed">
+        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-4 leading-relaxed">
           主动预防 · 智能陪伴 · 触手可及的全周期健康管理服务
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-10 py-10">
-        <p className="text-[18px] text-center max-w-[800px] mx-auto mb-16 text-text-secondary">
+      <div className="max-w-[1200px] mx-auto px-10 pt-0 pb-10">
+        <p className="text-[18px] text-center max-w-[800px] mx-auto mb-6 mt-4 text-text-secondary">
           为普通群众提供7x24小时的在线健康管家，涵盖体检报告解读、慢病日常管理、营养运动处方定制等核心场景。
         </p>
 
         {/* Demo Entry */}
-        <div className="bg-gradient-to-br from-bg-secondary to-[#e6f7ff] rounded-[32px] p-[80px_40px] text-center mb-20 relative overflow-hidden">
+        <div className="bg-gradient-to-br from-bg-secondary to-[#e6f7ff] rounded-[32px] p-[50px_40px] text-center mb-20 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-white text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold tracking-wide shadow-sm">
             System Entry
           </div>
@@ -29,7 +29,7 @@ export function ConsumerTab() {
           <p className="text-[18px] text-text-secondary mb-10 max-w-[600px] mx-auto">
             进入真实的浙里健康前端应用，体验基于多模态大模型的生活方式医学智能体平台。
           </p>
-          <a href="/wutong/" className="inline-block">
+          <a href="/wutong/" target="_blank" rel="noopener noreferrer" className="inline-block">
             <Button>进入大众端平台系统</Button>
           </a>
         </div>

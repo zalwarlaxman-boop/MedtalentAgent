@@ -39,19 +39,19 @@ export function OverviewTab() {
 
   return (
     <div className="w-full">
-      <div className="relative overflow-hidden text-center pt-24 pb-20 px-10 border-b border-black/5 mb-5 bg-gradient-to-b from-bg-secondary to-bg-color">
+      <div className="relative overflow-hidden text-center pt-20 pb-8 px-10 border-b border-black/5 mb-0 bg-gradient-to-b from-bg-secondary to-bg-color">
         <h2 className="text-[24px] font-semibold text-primary mb-4">AI 智能体矩阵</h2>
         <h1 className="font-title text-[56px] font-bold leading-[1.1] tracking-[-1px] mb-6 bg-gradient-to-br from-[#1A1D20] to-[#4A5568] bg-clip-text text-transparent">
           1+N 智能开发计划
         </h1>
-        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-8 leading-relaxed">
+        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-4 leading-relaxed">
           聚焦“AI+生活医学”核心赛道 · 技术赋能与商业变现双闭环
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-10 py-10">
+      <div className="max-w-[1200px] mx-auto px-10 pt-0 pb-10">
         {/* Demo */}
-        <div className="bg-bg-secondary rounded-[24px] p-10 my-16 relative overflow-hidden">
+        <div className="bg-bg-secondary rounded-[24px] p-10 mt-4 mb-16 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-primary/10 text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold">Interactive Demo</div>
           <h3 className="font-title text-[28px] font-bold text-text-main mb-6 mt-10 flex items-center gap-3">1+N 智能路由中枢</h3>
           <p className="text-[16px] text-text-secondary mb-10">模拟通用基座接收用户自然语言，精准路由至对应垂直智能体的过程。</p>

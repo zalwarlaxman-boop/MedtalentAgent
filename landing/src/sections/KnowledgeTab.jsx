@@ -15,18 +15,18 @@ export function KnowledgeTab() {
 
   return (
     <div className="w-full">
-      <div className="relative overflow-hidden text-center pt-24 pb-20 px-10 border-b border-black/5 mb-5 bg-gradient-to-b from-bg-secondary to-bg-color">
+      <div className="relative overflow-hidden text-center pt-20 pb-8 px-10 border-b border-black/5 mb-0 bg-gradient-to-b from-bg-secondary to-bg-color">
         <h2 className="text-[24px] font-semibold text-primary mb-4">Knowledge Engine</h2>
         <h1 className="font-title text-[56px] font-bold leading-[1.1] tracking-[-1px] mb-6 bg-gradient-to-br from-[#1A1D20] to-[#4A5568] bg-clip-text text-transparent">
           智能健康知识引擎
         </h1>
-        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-8 leading-relaxed">
+        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-4 leading-relaxed">
           收录超 5000 万条权威医学数据 · RAG 检索增强
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-10 py-10">
-        <div className="bg-bg-secondary rounded-[24px] p-10 md:p-20 text-center my-16 relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-10 pt-0 pb-10">
+        <div className="bg-bg-secondary rounded-[24px] p-10 md:p-20 text-center mt-4 mb-16 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-primary/10 text-primary-dark px-4 py-1.5 rounded-full text-[13px] font-semibold">Knowledge Search</div>
           <h3 className="font-title text-[32px] font-bold text-text-main mb-4 mt-6 flex items-center justify-center gap-3 tracking-[-0.5px]">RAG 循证医学知识检索</h3>
           <p className="text-[18px] text-text-secondary mb-12 max-w-[600px] mx-auto">模拟在海量知识库中进行大模型语义检索，提供可溯源的权威医学结论。</p>

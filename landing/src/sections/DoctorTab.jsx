@@ -3,23 +3,23 @@ import { Card, Button } from "../components/UI";
 export function DoctorTab() {
   return (
     <div className="w-full">
-      <div className="relative overflow-hidden text-center pt-24 pb-20 px-10 border-b border-black/5 mb-5 bg-gradient-to-b from-bg-secondary to-bg-color">
+      <div className="relative overflow-hidden text-center pt-20 pb-8 px-10 border-b border-black/5 mb-0 bg-gradient-to-b from-bg-secondary to-bg-color">
         <h2 className="text-[24px] font-semibold text-[#00C853] mb-4">Doctor Workflow</h2>
         <h1 className="font-title text-[56px] font-bold leading-[1.1] tracking-[-1px] mb-6 bg-gradient-to-br from-[#00C853] to-[#009624] bg-clip-text text-transparent">
           医生端定制开发
         </h1>
-        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-8 leading-relaxed">
+        <p className="text-[20px] text-text-secondary max-w-[700px] mx-auto mb-4 leading-relaxed">
           门诊效率提升 · 智能病历生成 · 专科模型训练微调
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-10 py-10">
-        <p className="text-[18px] text-center max-w-[800px] mx-auto mb-16 text-text-secondary">
+      <div className="max-w-[1200px] mx-auto px-10 pt-0 pb-10">
+        <p className="text-[18px] text-center max-w-[800px] mx-auto mb-6 mt-4 text-text-secondary">
           为医生群体提供强大的效率工具，支持专病数据集本地化部署，通过定制专属工作流极大地减少案头工作时间。
         </p>
 
         {/* Demo Entry */}
-        <div className="bg-gradient-to-br from-bg-secondary to-[#e8f5e9] rounded-[32px] p-[80px_40px] text-center mb-20 relative overflow-hidden">
+        <div className="bg-gradient-to-br from-bg-secondary to-[#e8f5e9] rounded-[32px] p-[50px_40px] text-center mb-20 relative overflow-hidden">
           <div className="absolute top-6 left-6 bg-white text-[#009624] px-4 py-1.5 rounded-full text-[13px] font-semibold tracking-wide">
             System Entry
           </div>
@@ -29,7 +29,7 @@ export function DoctorTab() {
           <p className="text-[18px] text-text-secondary mb-10 max-w-[600px] mx-auto">
             进入真实的医生端应用，体验语音口述生成病历、智能预问诊与自动辅助诊断。
           </p>
-          <a href="/demo/" className="inline-block">
+          <a href="/demo/" target="_blank" rel="noopener noreferrer" className="inline-block">
             <Button variant="doctor">进入医生端系统</Button>
           </a>
         </div>

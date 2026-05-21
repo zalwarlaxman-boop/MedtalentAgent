@@ -32,15 +32,6 @@ export default function Splash({ open, onClose }: SplashProps) {
   };
 
   const handleLogin = () => {
-    if (!phone || phone.length !== 11) {
-      alert("请输入正确的手机号");
-      return;
-    }
-    if (!code || code.length !== 6) {
-      alert("请输入6位验证码");
-      return;
-    }
-    // 模拟登录成功
     onClose();
   };
 
@@ -76,7 +67,7 @@ export default function Splash({ open, onClose }: SplashProps) {
                 transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
                 className="mt-4 text-[15px] text-[#717069] leading-relaxed font-serif max-w-[22rem]"
               >
-                让健康触手可及，做自我健康第一责任人
+                让健康触手可及，做自己健康第一责任人
               </motion.p>
             </div>
 
@@ -87,40 +78,32 @@ export default function Splash({ open, onClose }: SplashProps) {
               transition={{ delay: 0.55, duration: 0.5, ease: "easeOut" }}
               className="w-full bg-white rounded-2xl p-6 shadow-sm border border-[#e8e6dc]/50"
             >
-              <h2 className="text-[18px] font-medium text-[#141413] mb-6 font-heading">手机号登录</h2>
+              <h2 className="text-[18px] font-medium text-[#141413] mb-6 font-heading">账号密码登录</h2>
               
-              {/* Phone Input */}
+              {/* Account Input */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[14px] text-[#717069] mb-2">手机号</label>
+                  <label className="block text-[14px] text-[#717069] mb-2">账号</label>
                   <input
-                    type="tel"
+                    type="text"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 11))}
-                    placeholder="请输入手机号"
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="请输入账号"
                     className="w-full px-4 py-3 rounded-xl border border-[#e8e6dc] bg-[#faf9f5] text-[#141413] text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-[#6a9bcc] placeholder:text-[#b0aea5] transition-colors"
                   />
                 </div>
 
-                {/* Code Input */}
+                {/* Password Input */}
                 <div>
-                  <label className="block text-[14px] text-[#717069] mb-2">验证码</label>
+                  <label className="block text-[14px] text-[#717069] mb-2">密码</label>
                   <div className="flex gap-3">
                     <input
-                      type="text"
+                      type="password"
                       value={code}
-                      onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                      placeholder="请输入验证码"
+                      onChange={(e) => setCode(e.target.value)}
+                      placeholder="请输入密码"
                       className="flex-1 px-4 py-3 rounded-xl border border-[#e8e6dc] bg-[#faf9f5] text-[#141413] text-[15px] outline-none focus-visible:ring-2 focus-visible:ring-[#6a9bcc] placeholder:text-[#b0aea5] transition-colors"
                     />
-                    <button
-                      type="button"
-                      onClick={handleGetCode}
-                      disabled={isSending}
-                      className="px-4 py-3 rounded-xl bg-[#faf9f5] border border-[#e8e6dc] text-[#6a9bcc] text-[14px] font-medium whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-[#6a9bcc] disabled:text-[#b0aea5] disabled:cursor-not-allowed transition-colors"
-                    >
-                      {countdown > 0 ? `${countdown}s` : "获取验证码"}
-                    </button>
                   </div>
                 </div>
 

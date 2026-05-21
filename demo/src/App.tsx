@@ -23,7 +23,7 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <Splash open={showSplash} onClose={handleCloseSplash} />
       <Routes>
         <Route path="/" element={<Layout />}>
